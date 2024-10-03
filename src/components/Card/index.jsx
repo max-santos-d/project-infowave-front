@@ -10,9 +10,9 @@ export default function Card({ id, publication, title, text, banner = '', commen
 
   return (
     <React.Fragment>
-      {id}
       <Container>
         <img src={banner} alt='img' />
+        {id}
 
         <Header>
           <HeaderContentContent>
@@ -22,12 +22,12 @@ export default function Card({ id, publication, title, text, banner = '', commen
 
           <HeaderContentInteractions>
             <section>
-              <FaRegComment size={26} />
+              <FaRegComment size={24} />
               <span>{comments}</span>
             </section>
 
             <section>
-              <FaRegHeart size={26} />
+              <FaRegHeart size={24} />
               <span>{likes}</span>
             </section>
           </HeaderContentInteractions>

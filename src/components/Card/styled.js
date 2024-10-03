@@ -6,13 +6,24 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-bottom: 3rem;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2rem;
 
   img {
     width: 100%;
     object-fit: cover;
     object-position: center;
     border-radius: 1rem 1rem 0 0;
+  }
+
+  p {
+    font-size: 1rem;
+    text-align: justify;
+  }
+
+  span {
+    font-size: 0.7rem;
   }
 `;
 
@@ -29,10 +40,6 @@ export const HeaderContentContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-
-  span {
-    font-size: 0.8rem;
-  }
 `;
 
 export const HeaderContentInteractions = styled.div`
@@ -48,9 +55,5 @@ export const HeaderContentInteractions = styled.div`
     align-items: center;
     justify-content: center;
     gap: 0.2rem;
-
-    span {
-      font-size: 0.8rem;
-    }
   }
 `;

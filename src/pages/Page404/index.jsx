@@ -3,7 +3,7 @@ import { MainContent } from '../../styles/GlobalStyled';
 import { useNavigate } from 'react-router-dom';
 
 export default function Page404() {
-  const [time, setTime] = useState(5);
+  const [time, setTime] = useState(2);
   const timeout = useRef();
   const navigate = useNavigate();
 
