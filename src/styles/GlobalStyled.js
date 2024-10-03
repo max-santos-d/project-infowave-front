@@ -12,7 +12,7 @@ export default createGlobalStyle`
 
   body {
     font-family: sans-serif;
-    background: ${colors.color2};
+    background: ${colors.color1};
   }
 
   html, body, #root {
@@ -43,5 +43,4 @@ export const MainContent = styled.section`
   padding: 30px;
   border-radius: 4px;
   background: ${colors.color1};
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;

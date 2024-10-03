@@ -1,22 +1,36 @@
 import React, { useState } from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
-import axios from '../../services/axios';
+
+import responseBD from '../../services/Data';
+import Card from '../../components/Card';
 
 export default function Home() {
-  const [data, setData] = useState('');
+  const [posts, setPosts] = useState([]);
 
   React.useEffect(() => {
-    async function getData() {
-      const { data } = await axios.get('/user');
-      setData(data);
-    }
     getData();
-  });
+  }, []);
+
+  async function getData() {
+    const response = responseBD.response;
+    setPosts(response);
+  }
+
   return (
     <React.Fragment>
       <MainContent>
-        <h1>Users</h1>
-        {data.response && data.response.map((el) => <p key={el.id}>{el.email}</p>)}
+        {posts.map((post) => (
+          <Card
+            key={post._id}
+            id={post._id}
+            publication={post.created_at}
+            title={post.title}
+            text={post.text}
+            banner={post.banner}
+            comments={post.comments}
+            likes={post.likes}
+          />
+        ))}
       </MainContent>
     </React.Fragment>
   );

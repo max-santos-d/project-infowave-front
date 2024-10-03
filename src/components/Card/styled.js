@@ -1,24 +1,56 @@
 import styled from 'styled-components';
-import { color1, color3 } from '../../config/colors';
+//import * as colors from '../../config/colors';
 
-export const Title = styled.h1`
-  color: ${(props) => (props.$isRed ? 'red' : 'blue')};
+export const Container = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 3rem;
 
-  small {
-    font-size: 12px;
-    color: ${(props) => (props.$isRed ? 'blue' : 'red')};
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 1rem 1rem 0 0;
   }
 `;
 
-export const Content = styled.p`
-  text-transform: uppercase;
+export const Header = styled.div`
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0 0.5rem 0;
 `;
 
-export const Button = styled.button`
-  background: ${color3};
-  border: none;
-  color: ${color1};
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: 700;
+export const HeaderContentContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  span {
+    font-size: 0.8rem;
+  }
+`;
+
+export const HeaderContentInteractions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+
+  section {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+
+    span {
+      font-size: 0.8rem;
+    }
+  }
 `;
