@@ -11,11 +11,12 @@ PALETA DE CORES PASTEIS
 #D4F3EB #FEC3D5 #CBF1FC #C5D3FC #F3E0D2 #D1CBF1
 */
 
-export const color1 = '#FFFFFF';
+export const white = '#FFFFFF';
+export const black = '#000000';
+export const color1 = '#f7abc7';
 export const color2 = '#C5D3FC';
 export const color3 = '#D1CBF1';
 export const color4 = '#CBF1FC';
-export const color5 = '#f7abc7';
 
 export const successColor = '#D4F3EB';
 export const errorColor = '#FEC3D5';

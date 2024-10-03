@@ -1,8 +1,9 @@
 import React from 'react';
 import P from 'prop-types';
+import { FaRegComment, FaRegHeart } from 'react-icons/fa';
 
 import { Container, Header, HeaderContentContent, HeaderContentInteractions } from './styled';
-import { FaRegComment, FaRegHeart } from 'react-icons/fa';
+import { CardText } from '../CardText';
 
 export default function Card({ id, publication, title, text, banner = '', comments, likes }) {
   const data = new Date(publication);
@@ -16,7 +17,7 @@ export default function Card({ id, publication, title, text, banner = '', commen
 
         <Header>
           <HeaderContentContent>
-            <h1>{title}</h1>
+            <CardText text={title} limit={35} isTitle={true} />
             <span>Publicado em: {dateForm}</span>
           </HeaderContentContent>
 
@@ -32,7 +33,7 @@ export default function Card({ id, publication, title, text, banner = '', commen
             </section>
           </HeaderContentInteractions>
         </Header>
-        <p>{text}</p>
+        <CardText text={text} limit={227} />
       </Container>
     </React.Fragment>
   );

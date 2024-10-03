@@ -1,12 +1,16 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 //import * as colors from '../../config/colors';
+
+export const StyledLink = styled(Link)`
+  color: black;
+`;
 
 export const Container = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 80%;
   margin: auto;
   margin-bottom: 2rem;
 

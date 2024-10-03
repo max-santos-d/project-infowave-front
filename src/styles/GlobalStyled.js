@@ -12,11 +12,11 @@ export default createGlobalStyle`
 
   body {
     font-family: sans-serif;
-    background: ${colors.color1};
+    background: ${colors.white};
   }
 
   html, body, #root {
-    height: 100%;
+    height: 100vh;
   }
 
   button {
@@ -39,8 +39,8 @@ export default createGlobalStyle`
 
 export const MainContent = styled.section`
   max-width: 480px;
-  margin: 30px auto;
+  margin: auto;
   padding: 30px;
   border-radius: 4px;
-  background: ${colors.color1};
+  background: ${colors.white};
 `;

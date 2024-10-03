@@ -1,15 +1,19 @@
 import styled from 'styled-components';
-import { color1, color5 } from '../../config/colors';
+import * as colors from '../../config/colors';
 
 export const Nav = styled.nav`
-  background: ${color5};
-  padding: 1rem;
-  gap: 1rem;
+  position: fixed;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  background: ${colors.color2};
+  height: 100vh;
+  width: 2rem;
+  padding: 1.5rem;
+  gap: 1rem;
 
   a {
-    color: ${color1};
+    color: ${colors.white};
   }
 `;
