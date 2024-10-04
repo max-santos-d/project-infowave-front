@@ -7,8 +7,9 @@ import Home from '../pages/Home';
 export default function MainRoutes() {
   return (
     <Routes>
-      <Route exact path='/' element={<Home />} />
       {/* <Route exact path='/about' element={<AuthRoute element={<About />}></AuthRoute>} /> */}
+      <Route exact path='/' element={<Home />} />
+      <Route exact path='/post/:id' element={<Home />} />
       <Route path='*' element={<Page404 />} />
     </Routes>
   );

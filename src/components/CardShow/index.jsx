@@ -8,14 +8,14 @@ import { CardText } from '../CardText';
 export default function Card({ id, publication, title, text, banner = '', comments, likes }) {
   const data = new Date(publication);
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
-
   return (
     <React.Fragment>
       <Container>
         <img src={banner} alt='img' />
+
         <Header>
           <HeaderContentContent>
-            <CardText text={title} limit={35} isTitle={true} />
+            <CardText text={title} isTitle={true} />
             <span>Publicado em: {dateForm}</span>
           </HeaderContentContent>
 
@@ -32,7 +32,7 @@ export default function Card({ id, publication, title, text, banner = '', commen
           </HeaderContentInteractions>
         </Header>
         <StyledLink to={`/post/${id}`}>
-          <CardText text={text} limit={227} />
+          <CardText text={text} />
         </StyledLink>
       </Container>
     </React.Fragment>

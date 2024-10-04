@@ -6,6 +6,11 @@ const getAllPost = () => {
   return axios.get(`${baseURL}/post`);
 };
 
+const getPost = (id) => {
+  return axios.get(`${baseURL}/post/${id}`);
+};
+
 export default {
   getAllPost,
+  getPost,
 };

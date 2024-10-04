@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
+import { useParams } from 'react-router-dom';
 
-import Card from '../../components/Card';
 import postService from '../../services/axios/post.service';
+import Card from '../../components/Card';
+import PostShow from '../../components/PostShow';
 
 export default function Home() {
-  const [posts, setPosts] = useState([]);
+  const { id: postID } = useParams();
+  const [posts, setPosts] = React.useState([]);
 
-  async function getAllPost() {
-    const { response } = (await postService.getAllPost()).data;
+  const getAllPost = async () => {
+    const response = (await postService.getAllPost()).data.response;
     setPosts(response);
-  }
+  };
 
   React.useEffect(() => {
     getAllPost();
-  }, []);
+  }, [postID]);
 
   return (
     <React.Fragment>
       <MainContent>
-        {posts.length &&
+        {postID && <PostShow id={postID} />}
+
+        {posts &&
+          !postID &&
           posts.map((post) => (
             <Card
               key={post._id}
