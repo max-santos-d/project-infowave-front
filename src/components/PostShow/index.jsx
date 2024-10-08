@@ -6,7 +6,7 @@ import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardShow from '../CardShow';
 import Comments from '../Comments';
 
-export default function PostShow({ id = '' }) {
+export default function PostShow({ id }) {
   const [post, setPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
 
@@ -16,6 +16,7 @@ export default function PostShow({ id = '' }) {
 
   React.useEffect(() => {
     getPost(id).then((response) => {
+      console.log(response);
       setPost(response);
       setComments(response.comments);
     });

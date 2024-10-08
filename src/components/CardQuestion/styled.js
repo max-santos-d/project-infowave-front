@@ -47,6 +47,8 @@ export const HeaderUser = styled.div`
 export const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
+  margin-left: 1rem;
 `;
 
 export const HeaderContentInteractions = styled.div`

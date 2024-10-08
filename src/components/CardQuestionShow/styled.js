@@ -14,13 +14,6 @@ export const Container = styled.section`
   margin: auto;
   margin-bottom: 2rem;
 
-  img {
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 1rem 1rem 0 0;
-  }
-
   p {
     font-size: 1rem;
     text-align: justify;
@@ -41,15 +34,31 @@ export const Header = styled.div`
   gap: 1rem;
 `;
 
-export const HeaderContentContent = styled.div`
+export const HeaderUser = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+`;
+
+export const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  margin-left: 1rem;
 `;
 
 export const HeaderContentInteractions = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.5rem;
   padding: 1rem;
 

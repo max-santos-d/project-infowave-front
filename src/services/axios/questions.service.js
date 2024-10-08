@@ -6,6 +6,11 @@ const getAllQuestions = () => {
   return axios.get(`${baseURL}/question`);
 };
 
+const getQuestion = (id) => {
+  return axios.get(`${baseURL}/question/${id}`);
+};
+
 export default {
   getAllQuestions,
+  getQuestion,
 };

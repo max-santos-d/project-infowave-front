@@ -9,8 +9,6 @@ import dateFormat from '../../config/dateFormat';
 export default function CardQuestion({ id, text, user = {}, comments, likes, created_at }) {
   const publicationDate = dateFormat(created_at);
 
-  console.log(id);
-
   return (
     <React.Fragment>
       <Container>
@@ -37,7 +35,7 @@ export default function CardQuestion({ id, text, user = {}, comments, likes, cre
           </HeaderContentInteractions>
         </Header>
 
-        <StyledLink to={``}>
+        <StyledLink to={`/question/${id}`}>
           <CardText text={text} limit={227} />
         </StyledLink>
       </Container>

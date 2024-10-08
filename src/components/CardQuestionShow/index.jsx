@@ -1,23 +1,26 @@
 import React from 'react';
 import P from 'prop-types';
-import { FaRegComment, FaRegHeart } from 'react-icons/fa';
+import { FaRegComment, FaRegHeart, FaUserCircle } from 'react-icons/fa';
 
-import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
+import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser, StyledLink } from './styled';
 import { CardText } from '../CardText';
 
-export default function CardQuestionShow({ id, publication, title, text, banner = '', comments, likes }) {
-  const data = new Date(publication);
+export default function CardQuestionShow({ id, user = {}, created_at, text, comments, likes }) {
+  const data = new Date(created_at);
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
+
+  console.log(user);
   return (
     <React.Fragment>
       <Container>
-        <img src={banner} alt='img' />
-
         <Header>
-          <HeaderContentContent>
-            <CardText text={title} isTitle={true} />
-            <span>Publicado em: {dateForm}</span>
-          </HeaderContentContent>
+          <HeaderUser>
+            {user.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
+            <HeaderContent>
+              {user._id ? <p>{user.username}</p> : <p>Usuário não identificado</p>}
+              <span>Publicado em: {dateForm}</span>
+            </HeaderContent>
+          </HeaderUser>
 
           <HeaderContentInteractions>
             <section>
@@ -41,7 +44,8 @@ export default function CardQuestionShow({ id, publication, title, text, banner 
 
 CardQuestionShow.propTypes = {
   id: P.string.isRequired,
-  publication: P.string.isRequired,
+  user: P.object,
+  created_at: P.string.isRequired,
   title: P.string,
   text: P.string.isRequired,
   banner: P.string,
