@@ -6,7 +6,7 @@ import { Container, Header, HeaderUser, HeaderContentInteractions, StyledLink, H
 import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
 
-export default function Card({ id, text, user = {}, comments, likes, created_at }) {
+export default function CardQuestion({ id, text, user = {}, comments, likes, created_at }) {
   const publicationDate = dateFormat(created_at);
 
   console.log(id);
@@ -45,7 +45,7 @@ export default function Card({ id, text, user = {}, comments, likes, created_at 
   );
 }
 
-Card.propTypes = {
+CardQuestion.propTypes = {
   id: P.string.isRequired,
   created_at: P.string.isRequired,
   text: P.string.isRequired,

@@ -5,7 +5,7 @@ import { FaRegComment, FaRegHeart } from 'react-icons/fa';
 import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
 import { CardText } from '../CardText';
 
-export default function CardShow({ id, publication, title, text, banner = '', comments, likes }) {
+export default function CardQuestionShow({ id, publication, title, text, banner = '', comments, likes }) {
   const data = new Date(publication);
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
   return (
@@ -39,7 +39,7 @@ export default function CardShow({ id, publication, title, text, banner = '', co
   );
 }
 
-CardShow.propTypes = {
+CardQuestionShow.propTypes = {
   id: P.string.isRequired,
   publication: P.string.isRequired,
   title: P.string,

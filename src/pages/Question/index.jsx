@@ -4,7 +4,7 @@ import { MainContent } from '../../styles/GlobalStyled';
 import questionsService from '../../services/axios/questions.service';
 import CardQuestion from '../../components/CardQuestion';
 
-export default function Page404() {
+export default function Question() {
   const [questions, setQuestions] = React.useState([]);
 
   const getAllQuestions = async () => {

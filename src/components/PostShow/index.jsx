@@ -6,7 +6,7 @@ import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardShow from '../CardShow';
 import Comments from '../Comments';
 
-export default function PostIndex({ id = '' }) {
+export default function PostShow({ id = '' }) {
   const [post, setPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
 
@@ -59,6 +59,6 @@ export default function PostIndex({ id = '' }) {
   );
 }
 
-PostIndex.propTypes = {
+PostShow.propTypes = {
   id: P.string.isRequired,
 };
