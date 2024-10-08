@@ -22,7 +22,7 @@ export default function QuestionShow({ id }) {
   }, [id]);
 
   return (
-    <>
+    <React.Fragment>
       {question._id && (
         <CardQuestionShow
           key={question._id}
@@ -54,7 +54,7 @@ export default function QuestionShow({ id }) {
         comments.map((comment) => (
           <Comments key={comment._id} text={comment.comment} user={comment.user} createdAt={comment.createdAt} />
         ))}
-    </>
+    </React.Fragment>
   );
 }
 

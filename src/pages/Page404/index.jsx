@@ -14,7 +14,7 @@ export default function Page404() {
       setTime((t) => t - 1);
     }, 1000);
 
-    if (time <= 0) navigate('/');
+    if (time <= 0) navigate('/post');
     return () => {
       clearTimeout(timeout.current);
     };

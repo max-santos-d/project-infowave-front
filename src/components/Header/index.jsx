@@ -7,7 +7,7 @@ import { FaLocationDot } from 'react-icons/fa6';
 export default function Header() {
   return (
     <Nav>
-      <Link to='/'>
+      <Link to='/post'>
         <FaHome size={24} />
       </Link>
 

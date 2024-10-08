@@ -9,7 +9,7 @@ export default function MainRoutes() {
   return (
     <Routes>
       {/* <Route exact path='/about' element={<AuthRoute element={<About />}></AuthRoute>} /> */}
-      <Route exact path='/' element={<Home />} />
+      <Route exact path='/post' element={<Home />} />
       <Route exact path='/post/:id' element={<Home />} />
       <Route exact path='/question' element={<Question />} />
       <Route exact path='/question/:id' element={<Question />} />

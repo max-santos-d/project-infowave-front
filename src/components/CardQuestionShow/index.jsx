@@ -9,7 +9,6 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, comm
   const data = new Date(created_at);
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
 
-  console.log(user);
   return (
     <React.Fragment>
       <Container>

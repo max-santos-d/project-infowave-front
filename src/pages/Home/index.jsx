@@ -3,7 +3,7 @@ import { MainContent } from '../../styles/GlobalStyled';
 import { useParams } from 'react-router-dom';
 
 import postService from '../../services/axios/post.service';
-import Card from '../../components/Card';
+import CardPost from '../../components/CardPost';
 import PostShow from '../../components/PostShow';
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
         {posts &&
           !postID &&
           posts.map((post) => (
-            <Card
+            <CardPost
               key={post._id}
               id={post._id}
               publication={post.created_at}

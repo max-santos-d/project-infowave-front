@@ -6,7 +6,7 @@ import { Container, Header, HeaderContentContent, HeaderContentInteractions, Sty
 import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
 
-export default function Card({ id, publication, title, text, banner = '', comments, likes }) {
+export default function CardPost({ id, publication, title, text, banner = '', comments, likes }) {
   const publicationDate = dateFormat(publication);
 
   return (
@@ -39,7 +39,7 @@ export default function Card({ id, publication, title, text, banner = '', commen
   );
 }
 
-Card.propTypes = {
+CardPost.propTypes = {
   id: P.string.isRequired,
   publication: P.string.isRequired,
   title: P.string,

@@ -21,7 +21,7 @@ export default function Question() {
 
   return (
     <MainContent>
-      {!questionID && !questions && !questions.length && <p>Nenhuma pergunta encontrado!</p>}
+      {!questionID && !questionID && !questions.length && <p>Nenhuma pergunta encontrado!</p>}
 
       {questionID && <QuestionShow id={questionID} />}
 
