@@ -22,6 +22,8 @@ export default function Home() {
   return (
     <React.Fragment>
       <MainContent>
+        {!postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
+
         {postID && <PostShow id={postID} />}
 
         {posts &&

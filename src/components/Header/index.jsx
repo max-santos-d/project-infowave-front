@@ -11,7 +11,7 @@ export default function Header() {
         <FaHome size={24} />
       </Link>
 
-      <Link to='/coment'>
+      <Link to='/question'>
         <FaRegComments size={24} />
       </Link>
 

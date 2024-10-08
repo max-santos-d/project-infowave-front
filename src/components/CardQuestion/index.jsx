@@ -1,23 +1,28 @@
 import React from 'react';
 import P from 'prop-types';
-import { FaRegComment, FaRegHeart } from 'react-icons/fa';
+import { FaRegComment, FaRegHeart, FaUserCircle } from 'react-icons/fa';
 
-import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
+import { Container, Header, HeaderUser, HeaderContentInteractions, StyledLink, HeaderContent } from './styled';
 import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
 
-export default function Card({ id, publication, title, text, banner = '', comments, likes }) {
-  const publicationDate = dateFormat(publication);
+export default function Card({ id, text, user = {}, comments, likes, created_at }) {
+  const publicationDate = dateFormat(created_at);
+
+  console.log(id);
 
   return (
     <React.Fragment>
       <Container>
-        <img src={banner} alt='img' />
         <Header>
-          <HeaderContentContent>
-            <CardText text={title} limit={35} isTitle={true} />
-            <span>Publicado em: {publicationDate}</span>
-          </HeaderContentContent>
+          <HeaderUser>
+            {user.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
+
+            <HeaderContent>
+              {user._id ? <p>{user.username}</p> : <p>Usuário não identificado</p>}
+              <span>Publicado em: {publicationDate}</span>
+            </HeaderContent>
+          </HeaderUser>
 
           <HeaderContentInteractions>
             <section>
@@ -31,7 +36,8 @@ export default function Card({ id, publication, title, text, banner = '', commen
             </section>
           </HeaderContentInteractions>
         </Header>
-        <StyledLink to={`/post/${id}`}>
+
+        <StyledLink to={``}>
           <CardText text={text} limit={227} />
         </StyledLink>
       </Container>
@@ -41,10 +47,9 @@ export default function Card({ id, publication, title, text, banner = '', commen
 
 Card.propTypes = {
   id: P.string.isRequired,
-  publication: P.string.isRequired,
-  title: P.string,
+  created_at: P.string.isRequired,
   text: P.string.isRequired,
-  banner: P.string,
   comments: P.number.isRequired,
   likes: P.number.isRequired,
+  user: P.object,
 };
