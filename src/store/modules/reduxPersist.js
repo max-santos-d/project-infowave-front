@@ -1,9 +1,9 @@
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
-  key: 'APPLICATION_NAME',
+  key: 'INFOWAVE',
   storage,
-  whitelist: ['example'],
+  whitelist: ['auth'],
 };
 
 export default persistConfig;

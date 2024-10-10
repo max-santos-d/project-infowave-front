@@ -2,16 +2,16 @@ import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
 import { useParams } from 'react-router-dom';
 
-import postService from '../../services/axios/post.service';
 import CardPost from '../../components/CardPost';
 import PostShow from '../../components/PostShow';
+import api from '../../services/axios';
 
 export default function Home() {
   const { id: postID } = useParams();
   const [posts, setPosts] = React.useState([]);
 
   const getAllPost = async () => {
-    const response = (await postService.getAllPost()).data.response;
+    const response = (await api.get('/post')).data.response;
     setPosts(response);
   };
 

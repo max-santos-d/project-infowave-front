@@ -1,17 +1,17 @@
 import React from 'react';
 import P from 'prop-types';
 
-import postService from '../../services/axios/post.service';
 import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardShow from '../CardShow';
 import Comments from '../Comments';
+import api from '../../services/axios';
 
 export default function PostShow({ id }) {
   const [post, setPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
 
   const getPost = async (id) => {
-    return (await postService.getPost(id)).data.response;
+    return (await api.get(`/question/${id}`)).data.response;
   };
 
   React.useEffect(() => {

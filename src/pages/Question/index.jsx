@@ -2,16 +2,16 @@ import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
 import { useParams } from 'react-router-dom';
 
-import questionsService from '../../services/axios/questions.service';
 import CardQuestion from '../../components/CardQuestion';
 import QuestionShow from '../../components/QuestionShow';
+import api from '../../services/axios';
 
 export default function Question() {
   const [questions, setQuestions] = React.useState([]);
   const { id: questionID } = useParams();
 
   const getAllQuestions = async () => {
-    const response = (await questionsService.getAllQuestions()).data.response;
+    const response = (await api.get('/question')).data.response;
     setQuestions(response);
   };
 

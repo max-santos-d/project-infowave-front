@@ -3,15 +3,15 @@ import P from 'prop-types';
 
 import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
 import Comments from '../Comments';
-import questionsService from '../../services/axios/questions.service';
 import CardQuestionShow from '../CardQuestionShow';
+import api from '../../services/axios';
 
 export default function QuestionShow({ id }) {
   const [question, setQuestion] = React.useState({});
   const [comments, setComments] = React.useState([]);
 
   const getQuestion = async (id) => {
-    return (await questionsService.getQuestion(id)).data.response;
+    return (await api.get(`/question/${id}`)).data.response;
   };
 
   React.useEffect(() => {

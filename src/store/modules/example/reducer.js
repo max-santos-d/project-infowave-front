@@ -2,6 +2,7 @@ import * as types from '../types';
 
 const initialState = {
   buttonClicked: false,
+  teste: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,7 @@ const reducer = (state = initialState, action) => {
       console.log('BUTTON_CLICKED_SUCCESS');
       const newState = { ...state };
       newState.buttonClicked = !newState.buttonClicked;
+      newState.teste = !newState.teste;
       return newState;
     }
     case types.BUTTON_CLICKED_FAILURE: {
