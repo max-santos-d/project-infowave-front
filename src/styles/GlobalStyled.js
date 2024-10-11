@@ -38,8 +38,8 @@ export default createGlobalStyle`
 `;
 
 export const MainContent = styled.section`
-  max-width: 480px;
-  margin: auto;
+  max-width: 340px;
+  margin-left: 15%;
   padding: 30px;
   border-radius: 4px;
   background: ${colors.white};

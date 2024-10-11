@@ -33,7 +33,7 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, comm
             </section>
           </HeaderContentInteractions>
         </Header>
-        <StyledLink to={`/post/${id}`}>
+        <StyledLink to={`/question/${id}`}>
           <CardText text={text} />
         </StyledLink>
       </Container>

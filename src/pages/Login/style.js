@@ -32,5 +32,5 @@ export const Form = styled.form`
 export const CreateUser = styled(Link)`
   display: flex;
   color: ${colors.color3};
-  margin-left: 78%;
+  margin-left: 66%;
 `;
