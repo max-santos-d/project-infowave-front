@@ -53,7 +53,7 @@ export default function Login() {
           <button type='submit'>Acessar</button>
         </Form>
 
-        <CreateUser to={'/createUser'}>Criar usuário</CreateUser>
+        <CreateUser to={'/register'}>Criar usuário</CreateUser>
       </Content>
     </MainContent>
   );
