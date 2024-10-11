@@ -19,7 +19,12 @@ export default function CardPost({ id, publication, title, text, banner = '', co
             <CardText text={title} limit={35} isTitle={true} />
             <span>Publicado em: {publicationDate}</span>
           </HeaderContentContent>
+        </Header>
 
+        <section>
+          <StyledLink to={`/post/${id}`}>
+            <CardText text={text} limit={227} />
+          </StyledLink>
           <HeaderContentInteractions>
             <div>
               <FaRegComment size={24} />
@@ -28,10 +33,7 @@ export default function CardPost({ id, publication, title, text, banner = '', co
 
             <LikeButton id={id} likes={likes} type={'post'} />
           </HeaderContentInteractions>
-        </Header>
-        <StyledLink to={`/post/${id}`}>
-          <CardText text={text} limit={227} />
-        </StyledLink>
+        </section>
       </Container>
     </React.Fragment>
   );

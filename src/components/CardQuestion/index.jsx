@@ -22,20 +22,21 @@ export default function CardQuestion({ id, text, user = {}, comments, likes, cre
               <span>Publicado em: {publicationDate}</span>
             </HeaderContent>
           </HeaderUser>
+        </Header>
+
+        <section>
+          <StyledLink to={`/question/${id}`}>
+            <CardText text={text} limit={227} />
+          </StyledLink>
 
           <HeaderContentInteractions>
             <div>
               <FaRegComment size={24} />
               <span>{comments.length}</span>
             </div>
-
             <LikeButton id={id} likes={likes} type={'question'} />
           </HeaderContentInteractions>
-        </Header>
-
-        <StyledLink to={`/question/${id}`}>
-          <CardText text={text} limit={227} />
-        </StyledLink>
+        </section>
       </Container>
     </React.Fragment>
   );

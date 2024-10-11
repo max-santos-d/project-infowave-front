@@ -5,7 +5,6 @@ import * as colors from '../../config/colors';
 
 export const Form = styled.form`
   display: flex;
-  margin-bottom: 2rem;
 `;
 
 export const Input = styled.input`

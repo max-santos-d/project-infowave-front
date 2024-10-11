@@ -13,6 +13,12 @@ export const Container = styled.section`
   align-items: flex-start;
   margin: auto;
   margin-bottom: 2rem;
+  section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
   img {
     width: 100%;
@@ -49,7 +55,7 @@ export const HeaderContentContent = styled.div`
   gap: 0.2rem;
 `;
 
-export const HeaderContentInteractions = styled.section`
+export const HeaderContentInteractions = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

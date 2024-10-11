@@ -1,7 +1,7 @@
 import React from 'react';
 import P from 'prop-types';
 
-import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
+import { Button, CommentsSection, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardShow from '../CardShow';
 import Comments from '../Comments';
 import api from '../../services/axios';
@@ -35,29 +35,31 @@ export default function PostShow({ postID }) {
         />
       )}
 
-      {post._id && (
-        <Form action=''>
-          <Input type='text' placeholder='Comentar' />
+      <CommentsSection>
+        {post._id && <p>Comentários:</p>}
 
-          <Button type='submit'>
-            <MyFaRegPaperPlane />
-          </Button>
-        </Form>
-      )}
+        {post._id && (
+          <Form action=''>
+            <Input type='text' placeholder='Comentar' />
 
-      {post._id && <p>Comentários:</p>}
+            <Button type='submit'>
+              <MyFaRegPaperPlane />
+            </Button>
+          </Form>
+        )}
 
-      {comments.length === 0 && (
-        <>
-          <br /> <p>Sem comentários!</p>
-        </>
-      )}
+        {comments.length === 0 && (
+          <>
+            <br /> <p>Sem comentários!</p>
+          </>
+        )}
 
-      {comments.length > 0 &&
-        post.comments &&
-        comments.map((comment) => (
-          <Comments key={comment._id} text={comment.text} user={comment.user} createdAt={comment.createdAt} />
-        ))}
+        {comments.length > 0 &&
+          post.comments &&
+          comments.map((comment) => (
+            <Comments key={comment._id} text={comment.text} user={comment.user} createdAt={comment.createdAt} />
+          ))}
+      </CommentsSection>
     </>
   );
 }

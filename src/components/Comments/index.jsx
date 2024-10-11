@@ -18,7 +18,6 @@ export default function Comments({ text, user, createdAt }) {
       </Header>
 
       <CommentContent>{text}</CommentContent>
-      <br />
     </>
   );
 }

@@ -32,33 +32,25 @@ export const Container = styled.section`
 `;
 
 export const Header = styled.div`
-  min-width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
   margin: 0.5rem 0 0.5rem 0;
   gap: 1rem;
+  margin-bottom: 1rem;
+
+  button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: -1.8rem;
+  }
 `;
 
 export const HeaderContentContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-`;
-
-export const HeaderContentInteractions = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
-
-  section {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.2rem;
-  }
 `;

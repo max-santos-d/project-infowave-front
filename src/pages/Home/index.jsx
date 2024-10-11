@@ -33,7 +33,6 @@ export default function Home() {
     <React.Fragment>
       <MainContent>
         <h1>POSTAGENS</h1>
-        <br />
 
         {looding && <p>Carregando...</p>}
 

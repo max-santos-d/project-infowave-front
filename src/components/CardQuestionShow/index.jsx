@@ -1,12 +1,12 @@
 import React from 'react';
 import P from 'prop-types';
-import { FaRegComment, FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from 'react-icons/fa';
 
 import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser, StyledLink } from './styled';
 import { CardText } from '../CardText';
 import LikeButton from '../LikeButton';
 
-export default function CardQuestionShow({ id, user = {}, created_at, text, comments, likes }) {
+export default function CardQuestionShow({ id, user = {}, created_at, text, likes }) {
   const data = new Date(created_at);
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
 
@@ -23,11 +23,6 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, comm
           </HeaderUser>
 
           <HeaderContentInteractions>
-            <section>
-              <FaRegComment size={24} />
-              <span>{comments}</span>
-            </section>
-
             <LikeButton id={id} likes={likes} type={'question'} />
           </HeaderContentInteractions>
         </Header>

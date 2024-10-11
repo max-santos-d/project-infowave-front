@@ -5,7 +5,6 @@ export const Header = styled.div`
   flex-direction: row;
   justify-content: left;
   align-items: center;
-  margin: 2rem 0 0.5rem 0;
 
   img {
     width: 40px;
@@ -27,4 +26,5 @@ export const HeaderContent = styled.div`
 
 export const CommentContent = styled.div`
   text-align: justify;
+  margin-bottom: 1rem;
 `;

@@ -10,6 +10,11 @@ export const Container = styled.section`
   margin: auto;
   margin-bottom: 2rem;
 
+  section {
+    display: flex;
+    flex-direction: row;
+  }
+
   p {
     font-size: 1rem;
     text-align: justify;
@@ -20,12 +25,12 @@ export const Container = styled.section`
   }
 `;
 
-export const Header = styled.div`
+export const Header = styled.section`
   min-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin: 0.5rem 0 0.5rem 0;
 `;
 
@@ -48,15 +53,20 @@ export const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+
+  p {
+    font-size: 1rem;
+  }
 `;
 
-export const HeaderContentInteractions = styled.section`
+export const HeaderContentInteractions = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  margin-left: 1.5rem;
 
   div {
     display: flex;
