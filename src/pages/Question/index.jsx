@@ -9,10 +9,18 @@ import api from '../../services/axios';
 export default function Question() {
   const [questions, setQuestions] = React.useState([]);
   const { id: questionID } = useParams();
+  const [looding, setLooding] = React.useState(false);
 
   const getAllQuestions = async () => {
-    const response = await (await api.get('/question')).data.response;
-    setQuestions(response);
+    try {
+      setLooding(true);
+      const response = await (await api.get('/question')).data.response;
+      setQuestions(response);
+      setLooding(false);
+    } catch (err) {
+      console.log(err);
+      setLooding(false);
+    }
   };
 
   React.useEffect(() => {
@@ -21,11 +29,16 @@ export default function Question() {
 
   return (
     <MainContent>
-      {!questionID && !questionID && !questions.length && <p>Nenhuma pergunta encontrado!</p>}
+      <h1>PERGUNTAS</h1>
+      <br />
+      {looding && <p>Carregando...</p>}
 
-      {questionID && <QuestionShow questionID={questionID} />}
+      {!looding && !questionID && !questionID && !questions.length && <p>Nenhuma pergunta encontrado!</p>}
 
-      {questions &&
+      {!looding && questionID && <QuestionShow questionID={questionID} />}
+
+      {!looding &&
+        questions &&
         !questionID &&
         questions.map((question) => (
           <CardQuestion

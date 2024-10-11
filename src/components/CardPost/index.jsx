@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import P from 'prop-types';
 import { FaRegComment, FaRegHeart } from 'react-icons/fa';
 
 import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
 import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
+import { useSelector } from 'react-redux';
 
 export default function CardPost({ id, publication, title, text, banner = '', comments, likes }) {
   const publicationDate = dateFormat(publication);
+  const user = useSelector((state) => state.auth.user);
+  const [userLiked, setUserLiked] = useState('#11111');
+
+  useEffect(() => {
+    if (likes.length > 0) {
+      likes.map((like) => {
+        if (like.user === user._id) {
+          setUserLiked('#ff6961');
+        }
+      });
+    }
+  }, [id, likes, user._id]);
+
+  console.log(`POST: ${id} | COLOR: ${userLiked}`);
 
   return (
     <React.Fragment>
@@ -22,12 +37,12 @@ export default function CardPost({ id, publication, title, text, banner = '', co
           <HeaderContentInteractions>
             <section>
               <FaRegComment size={24} />
-              <span>{comments}</span>
+              <span>{comments.length}</span>
             </section>
 
             <section>
-              <FaRegHeart size={24} />
-              <span>{likes}</span>
+              <FaRegHeart size={24} color={userLiked} />
+              <span>{likes.length}</span>
             </section>
           </HeaderContentInteractions>
         </Header>
@@ -45,6 +60,6 @@ CardPost.propTypes = {
   title: P.string,
   text: P.string.isRequired,
   banner: P.string,
-  comments: P.number.isRequired,
-  likes: P.number.isRequired,
+  comments: P.array.isRequired,
+  likes: P.array.isRequired,
 };
