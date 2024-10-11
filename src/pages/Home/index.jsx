@@ -11,7 +11,7 @@ export default function Home() {
   const [posts, setPosts] = React.useState([]);
 
   const getAllPost = async () => {
-    const response = (await api.get('/post')).data.response;
+    const response = await (await api.get('/post')).data.response;
     setPosts(response);
   };
 

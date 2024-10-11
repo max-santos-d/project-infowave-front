@@ -10,9 +10,10 @@ export default function AuthRoute({ element }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn && !token) return navigate('/auth', { state: { previousPath: location.pathname } });
-  }, [isLoggedIn, location.pathname, navigate, token]);
-
+    if (!isLoggedIn && !token) {
+      return navigate('/auth', { state: { previousPath: location.pathname } });
+    }
+  }, [isLoggedIn, navigate, token, element, location.pathname]);
   return element;
 }
 

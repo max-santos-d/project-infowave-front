@@ -3,16 +3,17 @@ import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { get } from 'lodash';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { MainContent } from '../../styles/GlobalStyled';
 import { Form } from './style';
 import * as actions from '../../store/modules/auth/actions';
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
   const location = useLocation();
   const previousPath = get(location, 'state.previousPath', '/post');
 
@@ -32,7 +33,7 @@ export default function Login() {
 
     if (formErrors) return;
 
-    dispatch(actions.loginRequest({ email, password, previousPath }));
+    dispatch(actions.loginRequest({ email, password, navigate, previousPath }));
   };
 
   return (

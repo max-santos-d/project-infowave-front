@@ -1,18 +1,23 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-import api from '../../../services/axios';
 
+import api from '../../../services/axios';
 import * as actions from './actions';
 import * as types from '../types';
 
 function* LoginRequest({ payload }) {
   try {
     const { data } = yield call(api.post, '/auth', payload);
+
     yield put(actions.loginSuccess({ ...data.response }));
-
-    console.log(data);
-
     toast.success('Login realizado.');
+    console.log('PREVIOUS');
+
+    //window.location.assign(payload.previousPath);
+    /* if (payload.navigate) {
+      const { previousPath, navigate } = payload;
+      navigate(previousPath, { replace: true });
+    } */
 
     //axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.response.token;
 
