@@ -24,6 +24,7 @@ const reducer = (state = initialState, action) => {
       return newState;
     }
     case types.LOGIN_FAILURE: {
+      console.log('LOGIN_FAILURE', action.payload);
       const newState = { ...initialState };
       return newState;
     }
