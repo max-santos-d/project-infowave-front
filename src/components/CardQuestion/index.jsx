@@ -1,10 +1,11 @@
 import React from 'react';
 import P from 'prop-types';
-import { FaRegComment, FaRegHeart, FaUserCircle } from 'react-icons/fa';
+import { FaRegComment, FaUserCircle } from 'react-icons/fa';
 
 import { Container, Header, HeaderUser, HeaderContentInteractions, StyledLink, HeaderContent } from './styled';
 import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
+import LikeButton from '../LikeButton';
 
 export default function CardQuestion({ id, text, user = {}, comments, likes, created_at }) {
   const publicationDate = dateFormat(created_at);
@@ -23,15 +24,12 @@ export default function CardQuestion({ id, text, user = {}, comments, likes, cre
           </HeaderUser>
 
           <HeaderContentInteractions>
-            <section>
+            <div>
               <FaRegComment size={24} />
-              <span>{comments}</span>
-            </section>
+              <span>{comments.length}</span>
+            </div>
 
-            <section>
-              <FaRegHeart size={24} />
-              <span>{likes}</span>
-            </section>
+            <LikeButton id={id} likes={likes} type={'question'} />
           </HeaderContentInteractions>
         </Header>
 
@@ -47,7 +45,7 @@ CardQuestion.propTypes = {
   id: P.string.isRequired,
   created_at: P.string.isRequired,
   text: P.string.isRequired,
-  comments: P.number.isRequired,
-  likes: P.number.isRequired,
+  comments: P.array.isRequired,
+  likes: P.array.isRequired,
   user: P.object,
 };

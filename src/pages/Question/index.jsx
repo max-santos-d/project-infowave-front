@@ -14,7 +14,7 @@ export default function Question() {
   const getAllQuestions = async () => {
     try {
       setLooding(true);
-      const response = await (await api.get('/question')).data.response;
+      const { response } = await (await api.get('/question')).data;
       setQuestions(response);
       setLooding(false);
     } catch (err) {

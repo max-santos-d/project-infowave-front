@@ -43,17 +43,19 @@ export const Header = styled.div`
 export const HeaderContentContent = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 2rem;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 0.2rem;
 `;
 
-export const HeaderContentInteractions = styled.div`
+export const HeaderContentInteractions = styled.section`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  padding: 0.3rem;
 
-  section {
-    cursor: pointer;
+  div {
     display: flex;
     flex-direction: column;
     align-items: center;

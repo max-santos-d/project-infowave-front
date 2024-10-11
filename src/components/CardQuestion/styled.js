@@ -51,14 +51,14 @@ export const HeaderContent = styled.div`
   margin-left: 1rem;
 `;
 
-export const HeaderContentInteractions = styled.div`
+export const HeaderContentInteractions = styled.section`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 
-  section {
-    cursor: pointer;
+  div {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -31,7 +31,7 @@ export default function PostShow({ postID }) {
           text={post.text}
           banner={post.banner}
           comments={post.comments.length}
-          likes={post.likes.length}
+          likes={post.likes}
         />
       )}
 

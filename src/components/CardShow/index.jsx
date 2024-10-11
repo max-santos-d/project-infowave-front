@@ -1,9 +1,10 @@
 import React from 'react';
 import P from 'prop-types';
-import { FaRegComment, FaRegHeart } from 'react-icons/fa';
+import { FaRegComment } from 'react-icons/fa';
 
 import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
 import { CardText } from '../CardText';
+import LikeButton from '../LikeButton';
 
 export default function CardShow({ id, publication, title, text, banner = '', comments, likes }) {
   const data = new Date(publication);
@@ -25,10 +26,7 @@ export default function CardShow({ id, publication, title, text, banner = '', co
               <span>{comments}</span>
             </section>
 
-            <section>
-              <FaRegHeart size={24} />
-              <span>{likes}</span>
-            </section>
+            <LikeButton id={id} likes={likes} type={'post'} />
           </HeaderContentInteractions>
         </Header>
         <StyledLink to={`/post/${id}`}>
@@ -46,5 +44,5 @@ CardShow.propTypes = {
   text: P.string.isRequired,
   banner: P.string,
   comments: P.number.isRequired,
-  likes: P.number.isRequired,
+  likes: P.array.isRequired,
 };

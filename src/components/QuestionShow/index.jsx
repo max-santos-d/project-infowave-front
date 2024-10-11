@@ -30,7 +30,7 @@ export default function QuestionShow({ questionID }) {
           created_at={question.created_at}
           text={question.text}
           comments={question.comments.length}
-          likes={question.likes.length}
+          likes={question.likes}
         />
       )}
 
