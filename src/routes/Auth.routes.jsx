@@ -1,22 +1,14 @@
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import P from 'prop-types';
-import { useEffect } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-export default function AuthRoute({ element }) {
+export default function AuthRoute() {
   const location = useLocation();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const token = useSelector((state) => state.auth.token);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isLoggedIn && !token) {
-      return navigate('/auth', { state: { previousPath: location.pathname } });
-    }
-  }, [isLoggedIn, navigate, token, element, location.pathname]);
-  return element;
+  return isLoggedIn && token ? (
+    <Outlet />
+  ) : (
+    <Navigate to={'/auth'} state={{ previousPath: location.pathname }} replace />
+  );
 }
-
-AuthRoute.propTypes = {
-  element: P.oneOfType([P.element, P.func]),
-};

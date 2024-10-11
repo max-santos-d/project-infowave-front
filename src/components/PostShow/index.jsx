@@ -6,21 +6,19 @@ import CardShow from '../CardShow';
 import Comments from '../Comments';
 import api from '../../services/axios';
 
-export default function PostShow({ id }) {
+export default function PostShow({ postID }) {
   const [post, setPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
 
-  const getPost = async (id) => {
-    return (await api.get(`/question/${id}`)).data.response;
+  const getPost = async (postID) => {
+    const response = await (await api.get(`/post/${postID}`)).data.response;
+    setPost(response);
+    setComments(response.comments);
   };
 
   React.useEffect(() => {
-    getPost(id).then((response) => {
-      console.log(response);
-      setPost(response);
-      setComments(response.comments);
-    });
-  }, [id]);
+    postID && getPost(postID);
+  }, [postID]);
 
   return (
     <>
@@ -37,19 +35,23 @@ export default function PostShow({ id }) {
         />
       )}
 
-      <Form action=''>
-        <Input type='text' placeholder='Comentar' />
+      {post._id && (
+        <Form action=''>
+          <Input type='text' placeholder='Comentar' />
 
-        <Button type='submit'>
-          <MyFaRegPaperPlane />
-        </Button>
-      </Form>
+          <Button type='submit'>
+            <MyFaRegPaperPlane />
+          </Button>
+        </Form>
+      )}
 
-      <br />
-      <p>Comentários:</p>
-      <br />
+      {post._id && <p>Comentários:</p>}
 
-      {comments.length === 0 && <p>Sem comentários!</p>}
+      {comments.length === 0 && (
+        <>
+          <br /> <p>Sem comentários!</p>
+        </>
+      )}
 
       {comments.length > 0 &&
         post.comments &&
@@ -61,5 +63,5 @@ export default function PostShow({ id }) {
 }
 
 PostShow.propTypes = {
-  id: P.string.isRequired,
+  postID: P.string.isRequired,
 };

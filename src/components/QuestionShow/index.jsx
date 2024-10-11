@@ -6,20 +6,19 @@ import Comments from '../Comments';
 import CardQuestionShow from '../CardQuestionShow';
 import api from '../../services/axios';
 
-export default function QuestionShow({ id }) {
+export default function QuestionShow({ questionID }) {
   const [question, setQuestion] = React.useState({});
   const [comments, setComments] = React.useState([]);
 
-  const getQuestion = async (id) => {
-    return (await api.get(`/question/${id}`)).data.response;
+  const getQuestion = async (questionID) => {
+    const response = await (await api.get(`/question/${questionID}`)).data.response;
+    setQuestion(response);
+    setComments(response.comments);
   };
 
   React.useEffect(() => {
-    getQuestion(id).then((response) => {
-      setQuestion(response);
-      setComments(response.comments);
-    });
-  }, [id]);
+    questionID && getQuestion(questionID);
+  }, [questionID]);
 
   return (
     <React.Fragment>
@@ -35,19 +34,23 @@ export default function QuestionShow({ id }) {
         />
       )}
 
-      <Form action=''>
-        <Input type='text' placeholder='Comentar' />
+      {question._id && (
+        <Form action=''>
+          <Input type='text' placeholder='Comentar' />
 
-        <Button type='submit'>
-          <MyFaRegPaperPlane />
-        </Button>
-      </Form>
+          <Button type='submit'>
+            <MyFaRegPaperPlane />
+          </Button>
+        </Form>
+      )}
 
-      <br />
-      <p>Comentários:</p>
-      <br />
+      {question._id && <p>Comentários:</p>}
 
-      {comments.length === 0 && <p>Sem comentários!</p>}
+      {comments.length === 0 && (
+        <>
+          <br /> <p>Sem comentários!</p>
+        </>
+      )}
 
       {comments.length > 0 &&
         question.comments &&
@@ -59,5 +62,5 @@ export default function QuestionShow({ id }) {
 }
 
 QuestionShow.propTypes = {
-  id: P.string,
+  questionID: P.string,
 };

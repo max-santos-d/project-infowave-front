@@ -19,7 +19,7 @@ export default function Header() {
         <FaLocationDot size={24} />
       </Link>
 
-      <Link to='/auth'>
+      <Link to='/user'>
         <FaUserAlt size={24} />
       </Link>
     </Nav>

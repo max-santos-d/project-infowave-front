@@ -11,19 +11,19 @@ export default function Question() {
   const { id: questionID } = useParams();
 
   const getAllQuestions = async () => {
-    const response = (await api.get('/question')).data.response;
+    const response = await (await api.get('/question')).data.response;
     setQuestions(response);
   };
 
   React.useEffect(() => {
-    getAllQuestions();
-  }, []);
+    !questionID && getAllQuestions();
+  }, [questionID]);
 
   return (
     <MainContent>
       {!questionID && !questionID && !questions.length && <p>Nenhuma pergunta encontrado!</p>}
 
-      {questionID && <QuestionShow id={questionID} />}
+      {questionID && <QuestionShow questionID={questionID} />}
 
       {questions &&
         !questionID &&

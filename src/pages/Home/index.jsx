@@ -16,7 +16,7 @@ export default function Home() {
   };
 
   React.useEffect(() => {
-    getAllPost();
+    !postID && getAllPost();
   }, [postID]);
 
   return (
@@ -24,7 +24,7 @@ export default function Home() {
       <MainContent>
         {!postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
 
-        {postID && <PostShow id={postID} />}
+        {postID && <PostShow postID={postID} />}
 
         {posts &&
           !postID &&

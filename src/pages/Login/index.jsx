@@ -6,7 +6,7 @@ import { get } from 'lodash';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { MainContent } from '../../styles/GlobalStyled';
-import { Form } from './style';
+import { Content, CreateUser, Form } from './style';
 import * as actions from '../../store/modules/auth/actions';
 
 export default function Login() {
@@ -38,19 +38,23 @@ export default function Login() {
 
   return (
     <MainContent>
-      <h1>Login</h1>
+      <Content>
+        <h1>Login</h1>
 
-      <Form onSubmit={handleSubmit}>
-        <input type='text' value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'Seu e-mail'} />
-        <input
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder={'Sua senha'}
-        />
+        <Form onSubmit={handleSubmit}>
+          <input type='text' value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'Seu e-mail'} />
+          <input
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={'Sua senha'}
+          />
 
-        <button type='submit'>Acessar</button>
-      </Form>
+          <button type='submit'>Acessar</button>
+        </Form>
+
+        <CreateUser to={'/createUser'}>Criar usuário</CreateUser>
+      </Content>
     </MainContent>
   );
 }
