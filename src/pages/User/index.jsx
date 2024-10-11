@@ -2,7 +2,7 @@ import { MainContent } from '../../styles/GlobalStyled';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as actions from '../../store/modules/auth/actions';
-import { Logout, UserContent, UserHeader } from './style';
+import { ButtonSection, Logout, UserContent, UserHeader } from './style';
 import { FaSignOutAlt } from 'react-icons/fa';
 
 export default function User() {
@@ -25,12 +25,14 @@ export default function User() {
         </UserContent>
 
         <Logout onClick={handleLogout}>
-          <FaSignOutAlt size={26} />
+          <FaSignOutAlt size={20} />
         </Logout>
       </UserHeader>
 
-      <button>Suas Perguntas</button>
-      <button>Suas curtidas</button>
+      <ButtonSection>
+        <button>Suas Perguntas</button>
+        <button>Suas curtidas</button>
+      </ButtonSection>
     </MainContent>
   );
 }
