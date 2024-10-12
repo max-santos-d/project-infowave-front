@@ -1,5 +1,6 @@
 import React from 'react';
 import P from 'prop-types';
+import { toast } from 'react-toastify';
 
 import { Button, CommentsSection, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardShow from '../CardShow';
@@ -9,11 +10,25 @@ import api from '../../services/axios';
 export default function PostShow({ postID }) {
   const [post, setPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
+  const [commentText, setCommentText] = React.useState('');
 
   const getPost = async (postID) => {
-    const response = await (await api.get(`/post/${postID}`)).data.response;
+    const { response } = await (await api.get(`/post/${postID}`)).data;
     setPost(response);
     setComments(response.comments);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { response } = await (await api.post(`/postMessage/${postID}`, { comment: commentText })).data;
+      setComments(response.comments);
+      toast.success('Comentário realizado');
+      setCommentText('');
+    } catch (err) {
+      console.log(err);
+      toast.error('Erro ao comentar.');
+    }
   };
 
   React.useEffect(() => {
@@ -39,8 +54,13 @@ export default function PostShow({ postID }) {
         {post._id && <p>Comentários:</p>}
 
         {post._id && (
-          <Form action=''>
-            <Input type='text' placeholder='Comentar' />
+          <Form onSubmit={handleSubmit}>
+            <Input
+              type='text'
+              value={commentText}
+              onChange={(event) => setCommentText(event.target.value)}
+              placeholder='Comentar'
+            />
 
             <Button type='submit'>
               <MyFaRegPaperPlane />

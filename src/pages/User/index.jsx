@@ -68,8 +68,8 @@ export default function User() {
             title={post.title}
             text={post.text}
             banner={post.banner}
-            comments={post.comments.length}
-            likes={post.likes.length}
+            comments={post.comments}
+            likes={post.likes}
           />
         ))}
     </MainContent>
