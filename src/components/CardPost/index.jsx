@@ -27,7 +27,9 @@ export default function CardPost({ id, publication, title, text, banner = '', co
           </StyledLink>
           <HeaderContentInteractions>
             <div>
-              <FaRegComment size={24} />
+              <button>
+                <FaRegComment size={24} />
+              </button>
               <span>{comments.length}</span>
             </div>
 

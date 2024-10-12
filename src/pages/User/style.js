@@ -46,25 +46,37 @@ export const Logout = styled.button`
 
 export const ButtonSection = styled.section`
   display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+`;
+
+export const ButtonsHeader = styled.div`
   align-items: center;
   justify-content: space-around;
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+`;
 
-  button {
-    width: 100%;
-    border: none;
-    padding: 0.7rem;
-    border-radius: 1rem;
-    background: none;
+export const ButtonsLikesHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  display: ${(props) => (props.$clickedvisible === 'true' ? 'hidden' : 'none')};
+`;
 
-    &:hover {
-      background: ${colors.color1};
-      color: ${colors.white};
-    }
+export const Button = styled.button`
+  width: 100%;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 1rem;
+  background: none;
 
-    &:focus {
-      background: ${colors.color2};
-      color: ${colors.white};
-    }
+  &:hover {
+    background: ${colors.color1};
+    color: ${colors.white};
+  }
+
+  &:focus {
+    background: ${colors.color2};
+    color: ${colors.white};
   }
 `;

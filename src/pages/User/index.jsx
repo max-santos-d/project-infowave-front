@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import React from 'react';
 
 import * as actions from '../../store/modules/auth/actions';
-import { ButtonSection, Logout, UserContent, UserHeader } from './style';
+import { Button, ButtonSection, ButtonsHeader, ButtonsLikesHeader, Logout, UserContent, UserHeader } from './style';
 import api from '../../services/axios';
 import CardPost from '../../components/CardPost';
 
@@ -14,6 +14,7 @@ export default function User() {
   const user = useSelector((state) => state.auth.user);
   const [posts, setPosts] = React.useState([]);
   const [looding, setLooding] = React.useState(false);
+  const [clickedLikes, setClickedLikes] = React.useState(false);
 
   const handleLogout = () => {
     dispatch(actions.loginFailure());
@@ -21,19 +22,38 @@ export default function User() {
 
   const handleQuestions = () => {
     toast.success('Suas perguntas.');
+    setClickedLikes(false);
+    setPosts([]);
   };
 
-  const handleLikes = async () => {
+  const handleLikesPosts = async () => {
     try {
       setLooding(true);
       const { response } = await (await api.get('/postLike')).data;
       setPosts(response);
+      setLooding(false);
       console.log(response);
+    } catch (err) {
+      console.log(err);
+      setLooding(false);
+    }
+  };
+
+  const handleLikesQuestions = async () => {
+    try {
+      setLooding(true);
+      const { response } = await (await api.get('/questionLike')).data;
+      console.log(response);
+      //setPosts(response);
       setLooding(false);
     } catch (err) {
       console.log(err);
       setLooding(false);
     }
+  };
+
+  const handleLikes = () => {
+    setClickedLikes(true);
   };
 
   return (
@@ -54,8 +74,15 @@ export default function User() {
       </UserHeader>
 
       <ButtonSection>
-        <button onClick={handleQuestions}>Suas Perguntas</button>
-        <button onClick={handleLikes}>Suas curtidas</button>
+        <ButtonsHeader>
+          <Button onClick={handleQuestions}>Suas Perguntas</Button>
+          <Button onClick={handleLikes}>Suas curtidas</Button>
+        </ButtonsHeader>
+
+        <ButtonsLikesHeader $clickedvisible={clickedLikes ? 'true' : undefined}>
+          <Button onClick={handleLikesPosts}>Postágens</Button>
+          <Button onClick={handleLikesQuestions}>Perguntas</Button>
+        </ButtonsLikesHeader>
       </ButtonSection>
 
       {!looding &&

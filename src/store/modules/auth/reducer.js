@@ -11,12 +11,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_REQUEST: {
       //const newState = { ...state };
-      console.log('REDUCER_REQUEST', action.payload);
       return state;
     }
     case types.LOGIN_SUCCESS: {
       const newState = { ...state };
-      console.log('REDUCER_SUCCESS', action.payload);
 
       newState.isLoggedIn = true;
       newState.token = action.payload.token;
@@ -24,7 +22,6 @@ const reducer = (state = initialState, action) => {
       return newState;
     }
     case types.LOGIN_FAILURE: {
-      console.log('LOGIN_FAILURE', action.payload);
       const newState = { ...initialState };
       return newState;
     }
