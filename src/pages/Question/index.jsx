@@ -11,19 +11,19 @@ import CreateQuestionForm from '../../components/CreateQuestionFrom';
 export default function Question() {
   const [questions, setQuestions] = React.useState([]);
   const { id: questionID } = useParams();
-  const [looding, setLooding] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState('');
   const [questionCreationChecker, setquestionCreationChecker] = React.useState(false);
 
   const getAllQuestions = async () => {
     try {
-      setLooding(true);
+      setLoading(true);
       const { response } = await (await api.get('/question')).data;
       setQuestions(response);
-      setLooding(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
-      setLooding(false);
+      setLoading(false);
     }
   };
 
@@ -33,13 +33,13 @@ export default function Question() {
     setquestionCreationChecker(false);
 
     try {
-      setLooding(true);
+      setLoading(true);
       const { response } = await (await api.get(`/question?searchText=${searchText}`)).data;
       setQuestions(response);
-      setLooding(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
-      setLooding(false);
+      setLoading(false);
     }
   };
 
@@ -56,17 +56,9 @@ export default function Question() {
     <MainContent>
       {!questionID && <h1>PERGUNTAS</h1>}
 
-      {!looding && !questionID && questionCreationChecker && (
-        <>
-          <CreateQuestion onClick={handleCreateQuestion}>
-            {!questionCreationChecker ? 'Criar Pergunta' : 'Visualizar Perguntas'}
-          </CreateQuestion>
+      {loading && <p>Carregando...</p>}
 
-          <CreateQuestionForm />
-        </>
-      )}
-
-      {!questionID && !questionCreationChecker && (
+      {!loading && !questionID && !questionCreationChecker && (
         <Form onSubmit={handleSubmit}>
           <Input
             type='text'
@@ -81,16 +73,21 @@ export default function Question() {
         </Form>
       )}
 
-      <br />
-      {looding && <p>Carregando...</p>}
-
-      {!looding && !questionCreationChecker && !questionID && !questionID && !questions.length && (
-        <p>Nenhuma pergunta encontrado!</p>
+      {!loading && !questionID && (
+        <CreateQuestion onClick={handleCreateQuestion}>
+          {!questionCreationChecker ? 'Criar Pergunta' : 'Visualizar Perguntas'}
+        </CreateQuestion>
       )}
 
-      {!looding && !questionCreationChecker && questionID && <QuestionShow questionID={questionID} />}
+      {!loading && !questionID && questionCreationChecker && (
+        <>
+          <CreateQuestionForm />
+        </>
+      )}
 
-      {!looding &&
+      {!loading && !questionCreationChecker && questionID && <QuestionShow questionID={questionID} />}
+
+      {!loading &&
         !questionCreationChecker &&
         questions &&
         !questionID &&
@@ -105,6 +102,10 @@ export default function Question() {
             created_at={question.created_at}
           />
         ))}
+
+      {!loading && !questionCreationChecker && !questionID && !questionID && !questions.length && (
+        <p>Nenhuma pergunta encontrado!</p>
+      )}
     </MainContent>
   );
 }

@@ -13,11 +13,20 @@ export default function PostShow() {
   const [post, setPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
   const [commentText, setCommentText] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
 
   const getPost = async (postID) => {
-    const { response } = await (await api.get(`/post/${postID}`)).data;
-    setPost(response);
-    setComments(response.comments);
+    try {
+      setLoading(true);
+      const { response } = await (await api.get(`/post/${postID}`)).data;
+      setPost(response);
+      setComments(response.comments);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      toast.error('Erro ao carregar posts');
+      setLoading(false);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -39,7 +48,9 @@ export default function PostShow() {
 
   return (
     <MainContent>
-      {post._id && (
+      {loading && <p>Carregando...</p>}
+
+      {!loading && post._id && (
         <CardShow
           key={post._id}
           id={post._id}
@@ -53,9 +64,9 @@ export default function PostShow() {
       )}
 
       <CommentsSection>
-        {post._id && <p>Comentários:</p>}
+        {!loading && post._id && <p>Comentários:</p>}
 
-        {post._id && (
+        {!loading && post._id && (
           <Form onSubmit={handleSubmit}>
             <Input
               type='text'
@@ -70,13 +81,14 @@ export default function PostShow() {
           </Form>
         )}
 
-        {comments.length === 0 && (
+        {!loading && comments.length === 0 && (
           <>
             <br /> <p>Sem comentários!</p>
           </>
         )}
 
-        {comments.length > 0 &&
+        {!loading &&
+          comments.length > 0 &&
           post.comments &&
           comments.map((comment) => (
             <Comments key={comment._id} text={comment.text} user={comment.user} createdAt={comment.createdAt} />

@@ -33,24 +33,17 @@ export const Container = styled.section`
 
 export const Header = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
   margin: 0.5rem 0 0.5rem 0;
   gap: 1rem;
   margin-bottom: 1rem;
-
-  button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: -1.8rem;
-  }
 `;
 
 export const HeaderContentContent = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 0.2rem;
 `;

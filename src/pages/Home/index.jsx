@@ -10,19 +10,19 @@ import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
 export default function Home() {
   const { id: postID } = useParams();
   const [posts, setPosts] = React.useState([]);
-  const [looding, setLooding] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState('');
 
   const getAllPost = async () => {
     try {
-      setLooding(true);
+      setLoading(true);
       const response = await (await api.get('/post')).data.response;
       setPosts(response);
-      setLooding(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
       toast.error('Erro de requisição.');
-      setLooding(false);
+      setLoading(false);
     }
   };
 
@@ -30,13 +30,13 @@ export default function Home() {
     event.preventDefault();
 
     try {
-      setLooding(true);
+      setLoading(true);
       const { response } = await (await api.get(`/post?searchText=${searchText}`)).data;
       setPosts(response);
-      setLooding(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
-      setLooding(false);
+      setLoading(false);
     }
   };
 
@@ -61,11 +61,11 @@ export default function Home() {
 
       <h1>POSTAGENS</h1>
       <br />
-      {looding && <p>Carregando...</p>}
+      {loading && <p>Carregando...</p>}
 
-      {!looding && !postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
+      {!loading && !postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
 
-      {!looding &&
+      {!loading &&
         posts &&
         !postID &&
         posts.map((post) => (

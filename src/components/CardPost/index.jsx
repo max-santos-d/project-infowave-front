@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import P from 'prop-types';
 
 import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
@@ -9,8 +9,6 @@ import { CommentButton } from '../CommentButton';
 
 export default function CardPost({ id, publication, title, text, banner = '', comments, likes }) {
   const publicationDate = dateFormat(publication);
-
-  useEffect(() => {}, []);
 
   return (
     <React.Fragment>
