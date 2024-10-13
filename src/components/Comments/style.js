@@ -28,4 +28,6 @@ export const CommentContent = styled.div`
   text-align: justify;
   white-space: pre-wrap;
   margin-bottom: 1rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;

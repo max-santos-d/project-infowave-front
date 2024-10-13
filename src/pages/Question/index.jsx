@@ -27,9 +27,6 @@ export default function Question() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    false;
-
     try {
       setLoading(true);
       const { response } = await (await api.get(`/question?searchText=${searchText}`)).data;

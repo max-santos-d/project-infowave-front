@@ -70,7 +70,7 @@ export default function QuestionShow({ questionID }) {
               ref={textareaRef}
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              placeholder='Digite sua pergunta aqui...'
+              placeholder='Digite seu comentário aqui...'
             />
 
             <Button type='submit'>

@@ -22,10 +22,17 @@ export default function User() {
     dispatch(actions.loginFailure());
   };
 
-  const handleQuestions = () => {
-    toast.success('Suas perguntas.');
-    setClickedLikes(false);
-    setPosts([]);
+  const handleQuestions = async () => {
+    try {
+      const { response } = await (await api.get('/questionSearchByUser')).data;
+      setClickedLikes(false);
+      setPosts([]);
+      setQuestions(response);
+    } catch (err) {
+      console.log(err);
+      toast.error('Erro ao realizar requisição');
+      setClickedLikes(false);
+    }
   };
 
   const handleLikesPosts = async () => {
@@ -58,6 +65,9 @@ export default function User() {
     setClickedLikes(true);
   };
 
+  console.log(looding);
+  console.log(posts);
+  console.log(questions);
   return (
     <MainContent>
       <h1>SEU PERFIL</h1>
@@ -115,6 +125,8 @@ export default function User() {
             created_at={question.created_at}
           />
         ))}
+
+      {!looding && !questions.length && !posts.length && <p>Não há registros.</p>}
     </MainContent>
   );
 }
