@@ -8,6 +8,7 @@ import User from '../pages/User';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import PostShow from '../components/PostShow';
+import CreateQuestionForm from '../components/CreateQuestionFrom';
 
 export default function MainRoutes() {
   return (
@@ -24,6 +25,8 @@ export default function MainRoutes() {
 
       <Route element={<AuthRoute />}>
         <Route exact path='/user' element={<User />} />
+
+        <Route exact path='/createQuestion' element={<CreateQuestionForm />} />
       </Route>
       <Route path='*' element={<Page404 />} />
     </Routes>

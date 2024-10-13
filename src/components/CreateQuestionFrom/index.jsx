@@ -1,12 +1,15 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
+import { MainContent } from '../../styles/GlobalStyled';
 import { Form, Textarea } from './style';
 import api from '../../services/axios';
 
 export default function CreateQuestionForm() {
   const [text, setText] = React.useState('');
   const textareaRef = React.useRef(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,6 +24,7 @@ export default function CreateQuestionForm() {
       ).data;
       setText('');
       toast.success('Pergunta criada.');
+      navigate('/question');
     } catch (err) {
       console.log(err);
       toast.error('Erro ao criar pergunta.');
@@ -34,7 +38,7 @@ export default function CreateQuestionForm() {
   }, [text]);
 
   return (
-    <>
+    <MainContent>
       <Form onSubmit={handleSubmit}>
         <Textarea
           ref={textareaRef}
@@ -45,6 +49,6 @@ export default function CreateQuestionForm() {
 
         <button>Criar</button>
       </Form>
-    </>
+    </MainContent>
   );
 }

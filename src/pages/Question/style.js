@@ -5,7 +5,7 @@ import * as colors from '../../config/colors';
 
 export const Form = styled.form`
   display: flex;
-  padding-top: 1rem;
+  padding-bottom: 1rem;
 `;
 
 export const Input = styled.input`
@@ -38,4 +38,8 @@ export const CreateQuestion = styled.button`
   border: none;
   background: ${colors.color2};
   color: ${colors.white};
+
+  a {
+    color: ${colors.white};
+  }
 `;
