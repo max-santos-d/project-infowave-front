@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import CardPost from '../../components/CardPost';
 import api from '../../services/axios';
+import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
 
 export default function Home() {
   const { id: postID } = useParams();
   const [posts, setPosts] = React.useState([]);
   const [looding, setLooding] = React.useState(false);
+
+  const [searchText, setSearchText] = useState('');
 
   const getAllPost = async () => {
     try {
@@ -24,14 +27,43 @@ export default function Home() {
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      setLooding(true);
+      console.log(searchText);
+      const { response } = await (await api.get(`/post?searchText=${searchText}`)).data;
+      console.log(response);
+      setPosts(response);
+      setLooding(false);
+    } catch (err) {
+      console.log(err);
+      setLooding(false);
+    }
+  };
+
   React.useEffect(() => {
     !postID && getAllPost();
   }, [postID]);
 
   return (
     <MainContent>
-      <h1>POSTAGENS</h1>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          type='text'
+          placeholder='Pesquisar'
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+        />
 
+        <Button type='submit'>
+          <MyFaRegPaperPlane />
+        </Button>
+      </Form>
+
+      <h1>POSTAGENS</h1>
+      <br />
       {looding && <p>Carregando...</p>}
 
       {!looding && !postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}

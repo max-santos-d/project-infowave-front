@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-//import * as colors from '../../config/colors';
+import * as colors from '../../config/colors';
 
 export const StyledLink = styled(Link)`
   color: black;
@@ -11,8 +11,10 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin: auto;
   margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid ${colors.color2};
+
   section {
     display: flex;
     flex-direction: row;
