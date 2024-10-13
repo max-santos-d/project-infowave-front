@@ -1,11 +1,11 @@
 import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
-import { Form } from './style';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { useNavigate } from 'react-router-dom';
 import { get } from 'lodash';
 
+import { Form } from './style';
 import api from '../../services/axios';
 
 export default function Register() {

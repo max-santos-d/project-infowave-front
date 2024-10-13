@@ -2,14 +2,18 @@ import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
 import { useParams } from 'react-router-dom';
 
+import api from '../../services/axios';
+import { Button, CreateQuestion, Form, Input, MyFaRegPaperPlane } from './style';
 import CardQuestion from '../../components/CardQuestion';
 import QuestionShow from '../../components/QuestionShow';
-import api from '../../services/axios';
+import CreateQuestionForm from '../../components/CreateQuestionFrom';
 
 export default function Question() {
   const [questions, setQuestions] = React.useState([]);
   const { id: questionID } = useParams();
   const [looding, setLooding] = React.useState(false);
+  const [searchText, setSearchText] = React.useState('');
+  const [questionCreationChecker, setquestionCreationChecker] = React.useState(false);
 
   const getAllQuestions = async () => {
     try {
@@ -23,21 +27,67 @@ export default function Question() {
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setquestionCreationChecker(false);
+
+    try {
+      setLooding(true);
+      const { response } = await (await api.get(`/question?searchText=${searchText}`)).data;
+      setQuestions(response);
+      setLooding(false);
+    } catch (err) {
+      console.log(err);
+      setLooding(false);
+    }
+  };
+
+  const handleCreateQuestion = (event) => {
+    event.preventDefault();
+    setquestionCreationChecker(!questionCreationChecker);
+  };
+
   React.useEffect(() => {
-    !questionID && getAllQuestions();
-  }, [questionID]);
+    !questionID && !questionCreationChecker && getAllQuestions();
+  }, [questionID, questionCreationChecker]);
 
   return (
     <MainContent>
       <h1>PERGUNTAS</h1>
+
+      <CreateQuestion onClick={handleCreateQuestion}>
+        {!questionCreationChecker ? 'Criar Pergunta' : 'Visualizar Perguntas'}
+      </CreateQuestion>
+
+      {!questionID && !questionCreationChecker && (
+        <Form onSubmit={handleSubmit}>
+          <Input
+            type='text'
+            placeholder='Pesquisar'
+            value={searchText}
+            onChange={(event) => setSearchText(event.target.value)}
+          />
+
+          <Button type='submit'>
+            <MyFaRegPaperPlane />
+          </Button>
+        </Form>
+      )}
+
       <br />
       {looding && <p>Carregando...</p>}
 
-      {!looding && !questionID && !questionID && !questions.length && <p>Nenhuma pergunta encontrado!</p>}
+      {!looding && !questionID && questionCreationChecker && <CreateQuestionForm />}
 
-      {!looding && questionID && <QuestionShow questionID={questionID} />}
+      {!looding && !questionCreationChecker && !questionID && !questionID && !questions.length && (
+        <p>Nenhuma pergunta encontrado!</p>
+      )}
+
+      {!looding && !questionCreationChecker && questionID && <QuestionShow questionID={questionID} />}
 
       {!looding &&
+        !questionCreationChecker &&
         questions &&
         !questionID &&
         questions.map((question) => (

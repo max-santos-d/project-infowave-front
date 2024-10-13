@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,8 +11,7 @@ export default function Home() {
   const { id: postID } = useParams();
   const [posts, setPosts] = React.useState([]);
   const [looding, setLooding] = React.useState(false);
-
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = React.useState('');
 
   const getAllPost = async () => {
     try {
@@ -32,9 +31,7 @@ export default function Home() {
 
     try {
       setLooding(true);
-      console.log(searchText);
       const { response } = await (await api.get(`/post?searchText=${searchText}`)).data;
-      console.log(response);
       setPosts(response);
       setLooding(false);
     } catch (err) {
