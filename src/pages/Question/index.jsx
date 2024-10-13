@@ -47,9 +47,7 @@ export default function Question() {
 
   return (
     <MainContent>
-      {loading && <p>Carregando...</p>}
-
-      {!loading && !questionID && (
+      {!questionID && (
         <Form onSubmit={handleSubmit}>
           <Input
             type='text'
@@ -65,6 +63,8 @@ export default function Question() {
       )}
 
       {!questionID && <h1>PERGUNTAS</h1>}
+
+      {loading && <p>Carregando...</p>}
 
       {!loading && !questionID && (
         <CreateQuestion>
