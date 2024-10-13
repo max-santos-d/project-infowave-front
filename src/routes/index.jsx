@@ -7,6 +7,7 @@ import Question from '../pages/Question';
 import User from '../pages/User';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import PostShow from '../components/PostShow';
 
 export default function MainRoutes() {
   return (
@@ -14,7 +15,7 @@ export default function MainRoutes() {
       <Route exact path='/auth' element={<Login />} />
 
       <Route exact path='/post' element={<Home />} />
-      <Route exact path='/post/:id' element={<Home />} />
+      <Route exact path='/post/:id' element={<PostShow />} />
 
       <Route exact path='/question' element={<Question />} />
       <Route exact path='/question/:id' element={<Question />} />

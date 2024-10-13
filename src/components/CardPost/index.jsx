@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import P from 'prop-types';
-import { FaRegComment } from 'react-icons/fa';
 
 import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
 import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
 import LikeButton from '../LikeButton';
+import { CommentButton } from '../CommentButton';
 
 export default function CardPost({ id, publication, title, text, banner = '', comments, likes }) {
   const publicationDate = dateFormat(publication);
+
+  useEffect(() => {}, []);
 
   return (
     <React.Fragment>
@@ -27,9 +29,7 @@ export default function CardPost({ id, publication, title, text, banner = '', co
           </StyledLink>
           <HeaderContentInteractions>
             <div>
-              <button>
-                <FaRegComment size={24} />
-              </button>
+              <CommentButton id={id} route={'post'} />
               <span>{comments.length}</span>
             </div>
 

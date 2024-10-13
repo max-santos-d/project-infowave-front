@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import CardPost from '../../components/CardPost';
-import PostShow from '../../components/PostShow';
 import api from '../../services/axios';
 
 export default function Home() {
@@ -30,32 +29,28 @@ export default function Home() {
   }, [postID]);
 
   return (
-    <React.Fragment>
-      <MainContent>
-        <h1>POSTAGENS</h1>
+    <MainContent>
+      <h1>POSTAGENS</h1>
 
-        {looding && <p>Carregando...</p>}
+      {looding && <p>Carregando...</p>}
 
-        {!looding && !postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
+      {!looding && !postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
 
-        {!looding && postID && <PostShow postID={postID} />}
-
-        {!looding &&
-          posts &&
-          !postID &&
-          posts.map((post) => (
-            <CardPost
-              key={post._id}
-              id={post._id}
-              publication={post.created_at}
-              title={post.title}
-              text={post.text}
-              banner={post.banner}
-              comments={post.comments}
-              likes={post.likes}
-            />
-          ))}
-      </MainContent>
-    </React.Fragment>
+      {!looding &&
+        posts &&
+        !postID &&
+        posts.map((post) => (
+          <CardPost
+            key={post._id}
+            id={post._id}
+            publication={post.created_at}
+            title={post.title}
+            text={post.text}
+            banner={post.banner}
+            comments={post.comments}
+            likes={post.likes}
+          />
+        ))}
+    </MainContent>
   );
 }

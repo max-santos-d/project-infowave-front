@@ -1,13 +1,15 @@
 import React from 'react';
-import P from 'prop-types';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 import { Button, CommentsSection, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardShow from '../CardShow';
 import Comments from '../Comments';
 import api from '../../services/axios';
+import { MainContent } from '../../styles/GlobalStyled';
 
-export default function PostShow({ postID }) {
+export default function PostShow() {
+  const { id: postID } = useParams();
   const [post, setPost] = React.useState({});
   const [comments, setComments] = React.useState([]);
   const [commentText, setCommentText] = React.useState('');
@@ -36,7 +38,7 @@ export default function PostShow({ postID }) {
   }, [postID]);
 
   return (
-    <>
+    <MainContent>
       {post._id && (
         <CardShow
           key={post._id}
@@ -80,10 +82,6 @@ export default function PostShow({ postID }) {
             <Comments key={comment._id} text={comment.text} user={comment.user} createdAt={comment.createdAt} />
           ))}
       </CommentsSection>
-    </>
+    </MainContent>
   );
 }
-
-PostShow.propTypes = {
-  postID: P.string.isRequired,
-};
