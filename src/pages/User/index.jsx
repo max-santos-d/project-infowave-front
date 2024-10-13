@@ -8,11 +8,13 @@ import * as actions from '../../store/modules/auth/actions';
 import { Button, ButtonSection, ButtonsHeader, ButtonsLikesHeader, Logout, UserContent, UserHeader } from './style';
 import api from '../../services/axios';
 import CardPost from '../../components/CardPost';
+import CardQuestion from '../../components/CardQuestion';
 
 export default function User() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [posts, setPosts] = React.useState([]);
+  const [questions, setQuestions] = React.useState([]);
   const [looding, setLooding] = React.useState(false);
   const [clickedLikes, setClickedLikes] = React.useState(false);
 
@@ -30,9 +32,9 @@ export default function User() {
     try {
       setLooding(true);
       const { response } = await (await api.get('/postLike')).data;
+      setQuestions([]);
       setPosts(response);
       setLooding(false);
-      console.log(response);
     } catch (err) {
       console.log(err);
       setLooding(false);
@@ -43,8 +45,8 @@ export default function User() {
     try {
       setLooding(true);
       const { response } = await (await api.get('/questionLike')).data;
-      console.log(response);
-      //setPosts(response);
+      setPosts([]);
+      setQuestions(response);
       setLooding(false);
     } catch (err) {
       console.log(err);
@@ -97,6 +99,20 @@ export default function User() {
             banner={post.banner}
             comments={post.comments}
             likes={post.likes}
+          />
+        ))}
+
+      {!looding &&
+        questions &&
+        questions.map((question) => (
+          <CardQuestion
+            key={question._id}
+            id={question._id}
+            text={question.text}
+            user={question.user}
+            comments={question.comments}
+            likes={question.likes}
+            created_at={question.created_at}
           />
         ))}
     </MainContent>
