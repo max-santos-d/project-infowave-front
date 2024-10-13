@@ -13,6 +13,10 @@ export const Container = styled.section`
   section {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
   }
 
   p {

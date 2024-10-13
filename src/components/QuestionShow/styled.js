@@ -5,18 +5,23 @@ import * as colors from '../../config/colors';
 
 export const Form = styled.form`
   display: flex;
+  align-items: flex-end;
 `;
 
-export const Input = styled.input`
-  width: 50%;
-  border: 2px solid #ccc;
-  border-radius: 5rem;
+export const Textarea = styled.textarea`
+  width: 100%;
+  min-height: 100%;
+  resize: none;
+  padding: 1rem;
   font-size: 1rem;
-  padding: 1rem 1rem 1rem 1.5rem;
-  transition: width 0.4s ease-in-out;
+  border-radius: 0.4rem;
+  border: 1px solid ${colors.color2};
+  box-sizing: border-box;
+  overflow: hidden;
 
-  &[type='text']:focus {
-    width: 100%;
+  &:focus {
+    outline: none;
+    border-color: ${colors.color2};
   }
 `;
 
@@ -24,7 +29,7 @@ export const MyFaRegPaperPlane = styled(FaRegPaperPlane)`
   font-size: 2.5rem;
   padding: 0.5rem;
   color: ${colors.white};
-  background: ${colors.color1};
+  background: ${colors.color2};
   border-radius: 50%;
 `;
 

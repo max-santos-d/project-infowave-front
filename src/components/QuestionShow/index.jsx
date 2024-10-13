@@ -1,7 +1,7 @@
 import React from 'react';
 import P from 'prop-types';
 
-import { Button, Form, Input, MyFaRegPaperPlane, CommentsSection } from './styled';
+import { Button, Form, MyFaRegPaperPlane, CommentsSection, Textarea } from './styled';
 import Comments from '../Comments';
 import CardQuestionShow from '../CardQuestionShow';
 import api from '../../services/axios';
@@ -10,7 +10,10 @@ import { toast } from 'react-toastify';
 export default function QuestionShow({ questionID }) {
   const [question, setQuestion] = React.useState({});
   const [comments, setComments] = React.useState([]);
+  //const [commentText, setCommentText] = React.useState('');
+
   const [commentText, setCommentText] = React.useState('');
+  const textareaRef = React.useRef(null);
 
   const getQuestion = async (questionID) => {
     const response = await (await api.get(`/question/${questionID}`)).data.response;
@@ -20,6 +23,9 @@ export default function QuestionShow({ questionID }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!commentText.length) return toast.error('insira um texto para comentário.');
+
     try {
       const { response } = await (await api.post(`/questionMessage/${questionID}`, { comment: commentText })).data;
       setComments(response.comments);
@@ -33,7 +39,13 @@ export default function QuestionShow({ questionID }) {
 
   React.useEffect(() => {
     questionID && getQuestion(questionID);
-  }, [questionID]);
+
+    if (question._id) {
+      const textarea = textareaRef.current;
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }, [questionID, commentText, question._id]);
 
   return (
     <React.Fragment>
@@ -54,11 +66,11 @@ export default function QuestionShow({ questionID }) {
 
         {question._id && (
           <Form onSubmit={handleSubmit}>
-            <Input
-              type='text'
+            <Textarea
+              ref={textareaRef}
               value={commentText}
-              onChange={(event) => setCommentText(event.target.value)}
-              placeholder='Comentar'
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder='Digite sua pergunta aqui...'
             />
 
             <Button type='submit'>

@@ -54,11 +54,17 @@ export default function Question() {
 
   return (
     <MainContent>
-      <h1>PERGUNTAS</h1>
+      {!questionID && <h1>PERGUNTAS</h1>}
 
-      <CreateQuestion onClick={handleCreateQuestion}>
-        {!questionCreationChecker ? 'Criar Pergunta' : 'Visualizar Perguntas'}
-      </CreateQuestion>
+      {!looding && !questionID && questionCreationChecker && (
+        <>
+          <CreateQuestion onClick={handleCreateQuestion}>
+            {!questionCreationChecker ? 'Criar Pergunta' : 'Visualizar Perguntas'}
+          </CreateQuestion>
+
+          <CreateQuestionForm />
+        </>
+      )}
 
       {!questionID && !questionCreationChecker && (
         <Form onSubmit={handleSubmit}>
@@ -77,8 +83,6 @@ export default function Question() {
 
       <br />
       {looding && <p>Carregando...</p>}
-
-      {!looding && !questionID && questionCreationChecker && <CreateQuestionForm />}
 
       {!looding && !questionCreationChecker && !questionID && !questionID && !questions.length && (
         <p>Nenhuma pergunta encontrado!</p>

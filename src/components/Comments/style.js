@@ -26,5 +26,6 @@ export const HeaderContent = styled.div`
 
 export const CommentContent = styled.div`
   text-align: justify;
+  white-space: pre-wrap;
   margin-bottom: 1rem;
 `;
