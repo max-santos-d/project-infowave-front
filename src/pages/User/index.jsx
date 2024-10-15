@@ -1,11 +1,21 @@
 import { MainContent } from '../../styles/GlobalStyled';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaSignOutAlt } from 'react-icons/fa';
+import { FaEdit, FaPlusCircle, FaSignOutAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import * as actions from '../../store/modules/auth/actions';
-import { Button, ButtonSection, ButtonsHeader, ButtonsLikesHeader, Logout, UserContent, UserHeader } from './style';
+import {
+  Button,
+  ButtonSection,
+  ButtonsHeader,
+  ButtonsLikesHeader,
+  HeaderInteractions,
+  UserContent,
+  UserHeader,
+  UserInfo,
+} from './style';
 import api from '../../services/axios';
 import CardPost from '../../components/CardPost';
 import CardQuestion from '../../components/CardQuestion';
@@ -17,6 +27,7 @@ export default function User() {
   const [questions, setQuestions] = React.useState([]);
   const [clickedLikes, setClickedLikes] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(actions.loginFailure());
@@ -68,6 +79,14 @@ export default function User() {
     setClickedLikes(true);
   };
 
+  const handleNewQuestion = () => {
+    navigate('/createQuestion');
+  };
+
+  const handleEditUser = () => {
+    navigate('/editUser');
+  };
+
   React.useEffect(() => {
     handleQuestions();
   }, []);
@@ -76,17 +95,35 @@ export default function User() {
     <MainContent>
       <h1>SEU PERFIL</h1>
       <UserHeader>
-        <img src={user.avatar} alt='' />
+        <UserInfo>
+          <img src={user.avatar} alt='' />
 
-        <UserContent>
-          <p>User: {user.name}</p>
-          <p>Username: {user.username}</p>
-          <p>E-mail: {user.email}</p>
-        </UserContent>
+          <UserContent>
+            <p>
+              User: <span>{user.name}</span>
+            </p>
+            <p>
+              Username: <span>{user.username}</span>
+            </p>
+            <p>
+              E-mail: <span>{user.email}</span>
+            </p>
+          </UserContent>
+        </UserInfo>
 
-        <Logout onClick={handleLogout}>
-          <FaSignOutAlt size={20} />
-        </Logout>
+        <HeaderInteractions>
+          <button onClick={handleEditUser}>
+            <FaEdit size={12} />
+          </button>
+
+          <button onClick={handleLogout}>
+            <FaSignOutAlt size={12} />
+          </button>
+
+          <button onClick={handleNewQuestion}>
+            <FaPlusCircle size={12} />
+          </button>
+        </HeaderInteractions>
       </UserHeader>
 
       <ButtonSection>

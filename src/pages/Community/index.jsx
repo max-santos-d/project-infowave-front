@@ -1,6 +1,6 @@
 import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import api from '../../services/axios';
 import { Button, CreateQuestion, Form, Input, MyFaRegPaperPlane } from './style';
@@ -12,6 +12,7 @@ export default function Community() {
   const { id: questionID } = useParams();
   const [loading, setLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState('');
+  const navigate = useNavigate();
 
   const getAllQuestions = async () => {
     try {
@@ -36,6 +37,10 @@ export default function Community() {
       console.log(err);
       setLoading(false);
     }
+  };
+
+  const handleNewQuestion = () => {
+    navigate('/createQuestion');
   };
 
   React.useEffect(() => {
@@ -63,11 +68,7 @@ export default function Community() {
 
       {loading && <p>Carregando...</p>}
 
-      {!loading && !questionID && (
-        <CreateQuestion>
-          <Link to={'/createQuestion'}>{'Criar Pergunta'}</Link>
-        </CreateQuestion>
-      )}
+      {!loading && !questionID && <CreateQuestion onClick={handleNewQuestion}>Criar Pergunta</CreateQuestion>}
 
       {!loading && questionID && <QuestionShow questionID={questionID} />}
 

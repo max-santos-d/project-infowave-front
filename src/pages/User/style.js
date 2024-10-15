@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import * as colors from '../../config/colors';
 
-export const UserHeader = styled.div`
+export const UserHeader = styled.section`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 2rem;
   background: ${colors.color3};
-  justify-content: left;
   align-items: center;
   border-radius: 2rem;
 
   img {
-    width: 5rem;
-    height: 5rem;
-    margin-left: -1.5rem;
+    width: 7rem;
+    height: 7rem;
+    margin-left: -3rem;
     background: ${colors.white};
     border: 4px solid ${colors.white};
     border-radius: 50%;
@@ -21,26 +22,44 @@ export const UserHeader = styled.div`
   }
 `;
 
-export const UserContent = styled.div`
-  padding: 0.5rem;
-  margin-right: 3rem;
-  color: ${colors.white};
-  font-size: 0.8rem;
-`;
-
-export const Logout = styled.button`
+export const UserInfo = styled.div`
   display: flex;
   align-items: center;
-  background: ${colors.color1};
-  border: none;
-  color: ${colors.white};
-  border-radius: 50%;
-  padding: 0.5rem;
-  transition: 0.2s ease-in-out;
-  margin-left: 2.5rem;
+`;
 
-  &:hover {
-    background: ${colors.warningColor};
+export const HeaderInteractions = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  gap: 0.5rem;
+
+  button {
+    display: flex;
+    align-items: center;
+    background: ${colors.color1};
+    border: none;
+    color: ${colors.white};
+    border-radius: 50%;
+    padding: 0.5rem;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      background: ${colors.warningColor};
+    }
+  }
+`;
+
+export const UserContent = styled.div`
+  padding: 0.5rem;
+  color: ${colors.white};
+  font-size: 0.8rem;
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  span {
+    display: block;
   }
 `;
 
