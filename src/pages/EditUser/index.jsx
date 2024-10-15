@@ -1,30 +1,30 @@
 import React from 'react';
-import { MainContent } from '../../styles/GlobalStyled';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
-import { useNavigate } from 'react-router-dom';
-import { get } from 'lodash';
 
 import { Form } from './style';
-import api from '../../services/axios';
+import { MainContent } from '../../styles/GlobalStyled';
+import { useSelector } from 'react-redux';
 
-export default function Register() {
-  const navigate = useNavigate();
+export default function EditUser() {
+  const {
+    name: nameStorage,
+    username: usarnameStorage,
+    avatar: avatarStorage,
+    email: emailStorage,
+  } = useSelector((state) => state.auth.user);
+
   const [name, setName] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [avatar, setAvatar] = React.useState('');
   const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
 
-  const urlValidation = (url) => {
-    try {
-      new URL(url);
-      return true;
-    } catch (err) {
-      console.log(err);
-      return false;
-    }
-  };
+  React.useEffect(() => {
+    setName(nameStorage);
+    setUsername(usarnameStorage);
+    setAvatar(avatarStorage);
+    setEmail(emailStorage);
+  }, [nameStorage, usarnameStorage, avatarStorage, emailStorage]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,23 +51,21 @@ export default function Register() {
       toast.error('E-mail inválido.');
     }
 
-    if (password.length < 6 || password.length > 50) {
-      formErrors = true;
-      toast.error('Senha deve conter entre 6 e 50 caracteres.');
-    }
-
     if (!formErrors) return;
 
+    toast.success('ok');
+  };
+
+  const urlValidation = (url) => {
     try {
-      await api.post('/user', { name, username, avatar, email, password });
-      toast.success('Usuário criado com sucesso.');
-      navigate('/auth', { replace: true });
+      new URL(url);
+      return true;
     } catch (err) {
       console.log(err);
-      const error = get(err, 'response.data.responseError', '');
-      toast.error(error);
+      return false;
     }
   };
+
   return (
     <MainContent>
       <h1>Crie sua conta:</h1>
@@ -110,16 +108,6 @@ export default function Register() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             placeholder='Informe seu e-mail'
-          />
-        </label>
-
-        <label htmlFor='password'>
-          Senha:
-          <input
-            type='password'
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder='Informe sua senha'
           />
         </label>
 
