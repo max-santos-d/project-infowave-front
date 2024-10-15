@@ -7,7 +7,7 @@ import { Button, CreateQuestion, Form, Input, MyFaRegPaperPlane } from './style'
 import CardQuestion from '../../components/CardQuestion';
 import QuestionShow from '../../components/QuestionShow';
 
-export default function Question() {
+export default function Community() {
   const [questions, setQuestions] = React.useState([]);
   const { id: questionID } = useParams();
   const [loading, setLoading] = React.useState(false);
@@ -59,7 +59,7 @@ export default function Question() {
         </Form>
       )}
 
-      {!questionID && <h1>PERGUNTAS</h1>}
+      {!questionID && <h1>COMUNIDADE</h1>}
 
       {loading && <p>Carregando...</p>}
 

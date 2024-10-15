@@ -3,12 +3,12 @@ import { Routes, Route } from 'react-router-dom';
 import AuthRoute from './Auth.routes';
 import Page404 from '../pages/Page404';
 import Home from '../pages/Home';
-import Question from '../pages/Question';
 import User from '../pages/User';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import PostShow from '../components/PostShow';
 import CreateQuestionForm from '../components/CreateQuestionFrom';
+import Community from '../pages/Community';
 
 export default function MainRoutes() {
   return (
@@ -18,8 +18,8 @@ export default function MainRoutes() {
       <Route exact path='/post' element={<Home />} />
       <Route exact path='/post/:id' element={<PostShow />} />
 
-      <Route exact path='/question' element={<Question />} />
-      <Route exact path='/question/:id' element={<Question />} />
+      <Route exact path='/question' element={<Community />} />
+      <Route exact path='/question/:id' element={<Community />} />
 
       <Route exact path='/register' element={<Register />} />
 

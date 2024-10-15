@@ -15,8 +15,8 @@ export default function User() {
   const user = useSelector((state) => state.auth.user);
   const [posts, setPosts] = React.useState([]);
   const [questions, setQuestions] = React.useState([]);
-  const [looding, setLooding] = React.useState(false);
   const [clickedLikes, setClickedLikes] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const handleLogout = () => {
     dispatch(actions.loginFailure());
@@ -24,40 +24,43 @@ export default function User() {
 
   const handleQuestions = async () => {
     try {
+      setLoading(true);
       const { response } = await (await api.get('/questionSearchByUser')).data;
       setClickedLikes(false);
       setPosts([]);
       setQuestions(response);
+      setLoading(false);
     } catch (err) {
       console.log(err);
       toast.error('Erro ao realizar requisição');
       setClickedLikes(false);
+      setLoading(false);
     }
   };
 
   const handleLikesPosts = async () => {
     try {
-      setLooding(true);
+      setLoading(true);
       const { response } = await (await api.get('/postLike')).data;
       setQuestions([]);
       setPosts(response);
-      setLooding(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
-      setLooding(false);
+      setLoading(false);
     }
   };
 
   const handleLikesQuestions = async () => {
     try {
-      setLooding(true);
+      setLoading(true);
       const { response } = await (await api.get('/questionLike')).data;
       setPosts([]);
       setQuestions(response);
-      setLooding(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
-      setLooding(false);
+      setLoading(false);
     }
   };
 
@@ -65,9 +68,10 @@ export default function User() {
     setClickedLikes(true);
   };
 
-  console.log(looding);
-  console.log(posts);
-  console.log(questions);
+  React.useEffect(() => {
+    handleQuestions();
+  }, []);
+
   return (
     <MainContent>
       <h1>SEU PERFIL</h1>
@@ -97,7 +101,9 @@ export default function User() {
         </ButtonsLikesHeader>
       </ButtonSection>
 
-      {!looding &&
+      {loading && <p>Carregando...</p>}
+
+      {!loading &&
         posts &&
         posts.map((post) => (
           <CardPost
@@ -112,21 +118,19 @@ export default function User() {
           />
         ))}
 
-      {!looding &&
-        questions &&
-        questions.map((question) => (
-          <CardQuestion
-            key={question._id}
-            id={question._id}
-            text={question.text}
-            user={question.user}
-            comments={question.comments}
-            likes={question.likes}
-            created_at={question.created_at}
-          />
-        ))}
-
-      {!looding && !questions.length && !posts.length && <p>Não há registros.</p>}
+      {!loading && questions
+        ? questions.map((question) => (
+            <CardQuestion
+              key={question._id}
+              id={question._id}
+              text={question.text}
+              user={question.user}
+              comments={question.comments}
+              likes={question.likes}
+              created_at={question.created_at}
+            />
+          ))
+        : !loading && <p>Nada encontrado.</p>}
     </MainContent>
   );
 }
