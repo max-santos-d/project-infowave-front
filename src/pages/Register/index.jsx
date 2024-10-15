@@ -70,7 +70,7 @@ export default function Register() {
   };
   return (
     <MainContent>
-      <h1>Crie sua conta:</h1>
+      <h1>Crie sua conta</h1>
 
       <Form onSubmit={handleSubmit}>
         <label htmlFor='name'>

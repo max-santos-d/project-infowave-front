@@ -20,3 +20,24 @@ export const loginFailure = (payload) => {
     payload,
   };
 };
+
+export const editUserRequest = (payload) => {
+  return {
+    type: types.EDITUSER_REQUEST,
+    payload,
+  };
+};
+
+export const editUserSuccess = (payload) => {
+  return {
+    type: types.EDITUSER_SUCCESS,
+    payload,
+  };
+};
+
+export const editUserFailure = (payload) => {
+  return {
+    type: types.EDITUSER_FAILURE,
+    payload,
+  };
+};

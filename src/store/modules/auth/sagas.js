@@ -23,4 +23,25 @@ function* LoginRequest({ payload }) {
   }
 }
 
-export default all([takeLatest(types.LOGIN_REQUEST, LoginRequest)]);
+function* EditUserRequest({ payload }) {
+  try {
+    const { data } = yield call(api.patch, '/user', {
+      name: payload.nameEdited,
+      username: payload.usernameEdited,
+      avatar: payload.avatarEdited,
+      email: payload.emailEdited,
+    });
+
+    yield put(actions.editUserSuccess({ ...data.response }));
+    toast.success('informações editadas');
+  } catch (err) {
+    console.log(err);
+    toast.error(err.response.data.responseError);
+    yield put(actions.editUserFailure());
+  }
+}
+
+export default all([
+  takeLatest(types.LOGIN_REQUEST, LoginRequest),
+  takeLatest(types.EDITUSER_REQUEST, EditUserRequest),
+]);

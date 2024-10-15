@@ -10,8 +10,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_REQUEST: {
-      //const newState = { ...state };
-      return state;
+      const newState = { ...state };
+      return newState;
     }
     case types.LOGIN_SUCCESS: {
       const newState = { ...state };
@@ -25,6 +25,21 @@ const reducer = (state = initialState, action) => {
       const newState = { ...initialState };
       return newState;
     }
+    case types.EDITUSER_REQUEST: {
+      const newState = { ...state };
+      return newState;
+    }
+    case types.EDITUSER_SUCCESS: {
+      const newState = { ...state };
+      newState.isLoggedIn = true;
+      newState.user = action.payload;
+      return newState;
+    }
+    case types.EDITUSER_FAILURE: {
+      const newState = { ...state };
+      return newState;
+    }
+
     default: {
       return state;
     }
