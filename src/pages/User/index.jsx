@@ -3,7 +3,16 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import React from 'react';
 
-import { Button, ButtonSection, ButtonsHeader, ButtonsLikesHeader, Options, UserContent, UserHeader } from './style';
+import {
+  Button,
+  ButtonSection,
+  ButtonsHeader,
+  ButtonsLikesHeader,
+  MyFaUserCircle,
+  Options,
+  UserContent,
+  UserHeader,
+} from './style';
 import api from '../../services/axios';
 import CardPost from '../../components/CardPost';
 import CardQuestion from '../../components/CardQuestion';
@@ -74,7 +83,7 @@ export default function User() {
         <Options>
           <UserOptions />
         </Options>
-        <img src={user.avatar} alt='' />
+        {user.avatar ? <img src={user.avatar} alt='' /> : <MyFaUserCircle />}
 
         <UserContent>
           <p>@{user.username}</p>

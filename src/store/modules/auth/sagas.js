@@ -7,7 +7,8 @@ import * as types from '../types';
 
 function* LoginRequest({ payload }) {
   try {
-    const { data } = yield call(api.post, '/auth', payload);
+    console.log(payload);
+    const { data } = yield call(api.post, '/auth', { login: payload.login, password: payload.password });
     yield put(actions.loginSuccess({ ...data.response }));
 
     toast.success('Login realizado.');

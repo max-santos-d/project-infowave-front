@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as colors from '../../config/colors';
+import { FaUserCircle } from 'react-icons/fa';
 
 export const UserHeader = styled.section`
   display: flex;
@@ -16,10 +17,20 @@ export const UserHeader = styled.section`
     height: 7rem;
     margin-top: -3rem;
     background: ${colors.white};
-    border: 4px solid ${colors.white};
+    border: 2px solid ${colors.white};
     border-radius: 50%;
     object-fit: cover;
   }
+`;
+
+export const MyFaUserCircle = styled(FaUserCircle)`
+  width: 7rem;
+  height: 7rem;
+  margin-top: -3rem;
+  background: ${colors.white};
+  border: 2px solid ${colors.white};
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const Options = styled.div`
