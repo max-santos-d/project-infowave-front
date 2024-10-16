@@ -37,9 +37,9 @@ export default function EditUser() {
       toast.error('Nome deve conter entre 3 e 255 caracteres.');
     }
 
-    if (username.length < 3 || username.length > 100) {
+    if (username.length < 3 || username.length > 15) {
       formErrors = true;
-      toast.error('Nome deve conter entre 3 e 255 caracteres.');
+      toast.error('Nome deve conter entre 3 e 10 caracteres.');
     }
 
     if (avatar) {

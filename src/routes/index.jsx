@@ -14,6 +14,8 @@ import EditUser from '../pages/EditUser';
 export default function MainRoutes() {
   return (
     <Routes>
+      <Route exact path='/' element={<Home />} />
+
       <Route exact path='/auth' element={<Login />} />
 
       <Route exact path='/post' element={<Home />} />

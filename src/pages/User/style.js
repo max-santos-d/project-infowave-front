@@ -3,18 +3,18 @@ import * as colors from '../../config/colors';
 
 export const UserHeader = styled.section`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
   background: ${colors.color3};
   align-items: center;
-  border-radius: 2rem;
+  border-radius: 3rem 1rem 3rem 1rem;
 
   img {
     width: 7rem;
     height: 7rem;
-    margin-left: -3rem;
+    margin-top: -3rem;
     background: ${colors.white};
     border: 4px solid ${colors.white};
     border-radius: 50%;
@@ -22,45 +22,18 @@ export const UserHeader = styled.section`
   }
 `;
 
-export const UserInfo = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const HeaderInteractions = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-  gap: 0.5rem;
-
-  button {
-    display: flex;
-    align-items: center;
-    background: ${colors.color1};
-    border: none;
-    color: ${colors.white};
-    border-radius: 50%;
-    padding: 0.5rem;
-    transition: 0.2s ease-in-out;
-
-    &:hover {
-      background: ${colors.warningColor};
-    }
-  }
+export const Options = styled.div`
+  position: absolute;
+  margin: -3.5rem 0 0 15rem;
 `;
 
 export const UserContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 0.5rem;
   color: ${colors.white};
   font-size: 0.8rem;
-
-  p {
-    margin-bottom: 0.5rem;
-  }
-
-  span {
-    display: block;
-  }
 `;
 
 export const ButtonSection = styled.section`

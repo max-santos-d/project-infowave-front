@@ -2,7 +2,7 @@ import React from 'react';
 import P from 'prop-types';
 import { FaUserCircle } from 'react-icons/fa';
 
-import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser, StyledLink } from './styled';
+import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser } from './styled';
 import { CardText } from '../CardText';
 import LikeButton from '../LikeButton';
 
@@ -26,9 +26,7 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
             <LikeButton id={id} likes={likes} type={'question'} />
           </HeaderContentInteractions>
         </Header>
-        <StyledLink to={`/question/${id}`}>
-          <CardText text={text} />
-        </StyledLink>
+        <CardText text={text} />
       </Container>
     </React.Fragment>
   );

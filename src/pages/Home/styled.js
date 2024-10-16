@@ -18,13 +18,12 @@ export const Input = styled.input`
   width: 100%;
   border: 2px solid #ccc;
   border-radius: 0.5rem 0 0 0.5rem;
-  font-size: 0.7rem;
-  padding: 1rem 1rem 1rem 1.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
 `;
 
 export const MyFaRegPaperPlane = styled(FaSearch)`
   height: 100%;
-  font-size: 2.5rem;
+  font-size: 2rem;
   padding: 0.5rem;
   color: ${colors.white};
   background: ${colors.color2};

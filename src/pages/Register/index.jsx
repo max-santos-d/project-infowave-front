@@ -35,9 +35,9 @@ export default function Register() {
       toast.error('Nome deve conter entre 3 e 255 caracteres.');
     }
 
-    if (username.length < 3 || username.length > 100) {
+    if (username.length < 3 || username.length > 15) {
       formErrors = true;
-      toast.error('Nome deve conter entre 3 e 255 caracteres.');
+      toast.error('Nome deve conter entre 3 e 15 caracteres.');
     }
 
     if (avatar) {

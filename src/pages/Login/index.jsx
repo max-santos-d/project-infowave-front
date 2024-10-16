@@ -42,12 +42,18 @@ export default function Login() {
         <h1>Login</h1>
 
         <Form onSubmit={handleSubmit}>
-          <input type='text' value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'Seu e-mail'} />
+          <input
+            type='text'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder={'Informe seu e-mail.'}
+          />
+
           <input
             type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder={'Sua senha'}
+            placeholder={'Informe sua senha.'}
           />
 
           <button type='submit'>Acessar</button>
