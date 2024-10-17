@@ -74,3 +74,7 @@ export const HeaderContentInteractions = styled.div`
     gap: 0.2rem;
   }
 `;
+
+export const TextContent = styled.div`
+  width: 100%;
+`;

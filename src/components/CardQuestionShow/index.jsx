@@ -1,7 +1,7 @@
 import P from 'prop-types';
 import { FaUserCircle } from 'react-icons/fa';
 
-import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser } from './styled';
+import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser, TextContent } from './styled';
 import { CardText } from '../CardText';
 import LikeButton from '../LikeButton';
 import CardOptions from '../CardOption';
@@ -26,8 +26,9 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
           <LikeButton id={id} likes={likes} type={'question'} />
         </HeaderContentInteractions>
       </Header>
-
-      <CardText text={text} />
+      <TextContent>
+        <CardText text={text} />
+      </TextContent>
     </Container>
   );
 }
