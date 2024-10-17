@@ -1,6 +1,5 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { isEmail } from 'validator';
 import { useDispatch } from 'react-redux';
 
 import { Form } from './style';
@@ -13,20 +12,18 @@ export default function EditUser() {
     name: nameStorage,
     username: usarnameStorage,
     avatar: avatarStorage,
-    email: emailStorage,
+    login: loginStorage,
   } = useSelector((state) => state.auth?.user._id && state.auth.user);
   const [name, setName] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [avatar, setAvatar] = React.useState('');
-  const [email, setEmail] = React.useState('');
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     setName(nameStorage);
     setUsername(usarnameStorage);
-    setAvatar(avatarStorage);
-    setEmail(emailStorage);
-  }, [nameStorage, usarnameStorage, avatarStorage, emailStorage]);
+    avatarStorage && setAvatar(avatarStorage);
+  }, [nameStorage, usarnameStorage, avatarStorage, loginStorage]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,10 +45,6 @@ export default function EditUser() {
         toast.error('URL inválida.');
       }
     }
-    if (!isEmail(email)) {
-      formErrors = true;
-      toast.error('E-mail inválido.');
-    }
 
     if (!formErrors) return;
 
@@ -63,7 +56,6 @@ export default function EditUser() {
     name !== nameStorage ? (nameEdited = name) : (nameEdited = undefined);
     username !== usarnameStorage ? (usernameEdited = username) : (usernameEdited = undefined);
     avatar !== avatarStorage ? (avatarEdited = avatar) : (avatarEdited = undefined);
-    email !== emailStorage ? (emailEdited = email) : (emailEdited = undefined);
 
     if (!nameEdited && !usernameEdited && !avatarEdited && !emailEdited)
       return toast.info('Nenhum valor informado foi alterado');
@@ -116,14 +108,9 @@ export default function EditUser() {
           />
         </label>
 
-        <label htmlFor='email'>
-          E-mail:
-          <input
-            type='email'
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder='Informe seu e-mail'
-          />
+        <label htmlFor='login'>
+          Login:
+          <input type='text' value={loginStorage} readOnly />
         </label>
 
         <button>Salvar</button>

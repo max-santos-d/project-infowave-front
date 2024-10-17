@@ -1,49 +1,36 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-//import * as colors from '../../config/colors';
 
 export const Container = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  margin: auto;
   margin-bottom: 2rem;
 
-  section {
+  div {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 0.5rem;
   }
 
   p {
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: justify;
   }
 
   span {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
   }
-`;
-
-export const Header = styled.section`
-  min-width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0.5rem 0 0.5rem 0;
 `;
 
 export const HeaderUser = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.2rem;
+  margin-bottom: 0.6rem;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 
   img {
     width: 40px;
@@ -53,24 +40,19 @@ export const HeaderUser = styled.div`
   }
 `;
 
-export const HeaderContent = styled.div`
+export const HeaderContent = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
   margin-left: 0.5rem;
-
-  p {
-    font-size: 1rem;
-  }
 `;
 
-export const HeaderContentInteractions = styled.div`
+export const ContentInteractions = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-left: 1.5rem;
 
   div {
     display: flex;

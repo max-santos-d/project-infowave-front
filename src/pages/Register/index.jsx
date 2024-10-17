@@ -1,7 +1,6 @@
 import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
 import { toast } from 'react-toastify';
-import { isEmail } from 'validator';
 import { useNavigate } from 'react-router-dom';
 import { get } from 'lodash';
 
@@ -13,8 +12,9 @@ export default function Register() {
   const [name, setName] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [avatar, setAvatar] = React.useState('');
-  const [email, setEmail] = React.useState('');
+  const [login, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const validationLofin = /^\d+$/.test(login);
 
   const urlValidation = (url) => {
     try {
@@ -45,10 +45,13 @@ export default function Register() {
         formErrors = false;
         toast.error('URL inválida.');
       }
+    } else {
+      setAvatar('');
     }
-    if (!isEmail(email)) {
+
+    if (!validationLofin) {
       formErrors = true;
-      toast.error('E-mail inválido.');
+      toast.error('cpf deve conter apenas números');
     }
 
     if (password.length < 6 || password.length > 50) {
@@ -59,7 +62,7 @@ export default function Register() {
     if (!formErrors) return;
 
     try {
-      await api.post('/user', { name, username, avatar, email, password });
+      await api.post('/user', { name, username, avatar, login, password });
       toast.success('Usuário criado com sucesso.');
       navigate('/auth', { replace: true });
     } catch (err) {
@@ -74,7 +77,6 @@ export default function Register() {
 
       <Form onSubmit={handleSubmit}>
         <label htmlFor='name'>
-          Nome:
           <input
             type='text'
             value={name}
@@ -84,7 +86,6 @@ export default function Register() {
         </label>
 
         <label htmlFor='username'>
-          Username:
           <input
             type='text'
             value={username}
@@ -94,7 +95,6 @@ export default function Register() {
         </label>
 
         <label htmlFor='avatar'>
-          Avatar:
           <input
             type='text'
             value={avatar}
@@ -104,17 +104,15 @@ export default function Register() {
         </label>
 
         <label htmlFor='email'>
-          E-mail:
           <input
-            type='email'
-            value={email}
+            type='text'
+            value={login}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder='Informe seu e-mail'
+            placeholder='Informe seu cpf'
           />
         </label>
 
         <label htmlFor='password'>
-          Senha:
           <input
             type='password'
             value={password}

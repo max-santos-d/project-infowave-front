@@ -50,7 +50,7 @@ export default function LikeButton({ id, likes, type }) {
 
   return (
     <Button onClick={handleLike}>
-      <FaRegHeart size={24} color={userLiked ? '#ff6961' : '#111'} />
+      <FaRegHeart size={18} color={userLiked ? '#ff6961' : '#111'} />
       <span>{likesPost.length}</span>
     </Button>
   );
