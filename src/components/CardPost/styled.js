@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import * as colors from '../../config/colors';
 
 export const StyledLink = styled(Link)`
   color: black;
@@ -12,32 +11,26 @@ export const Container = styled.section`
   justify-content: center;
   align-items: flex-start;
   margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid ${colors.color2};
 
   section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
-    gap: 0.5rem;
   }
 
   img {
     width: 100%;
+    height: 13rem;
     object-fit: cover;
     object-position: center;
-    border-radius: 1rem 1rem 0 0;
+    border-radius: 0.4rem;
   }
 
   p {
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-align: justify;
   }
 
   span {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
   }
 `;
 
@@ -57,19 +50,25 @@ export const HeaderContentContent = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   gap: 0.2rem;
+  font-size: 0.8rem;
 `;
 
 export const HeaderContentInteractions = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding: 0.3rem;
+  justify-content: center;
+  gap: 0.3rem;
+  padding-left: 0.3rem;
 
   div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.2rem;
   }
+`;
+
+export const TextContent = styled.div`
+  width: 100%;
 `;

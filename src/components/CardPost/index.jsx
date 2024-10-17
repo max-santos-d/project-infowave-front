@@ -1,7 +1,6 @@
-import React from 'react';
 import P from 'prop-types';
 
-import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink } from './styled';
+import { Container, Header, HeaderContentContent, HeaderContentInteractions, StyledLink, TextContent } from './styled';
 import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
 import LikeButton from '../LikeButton';
@@ -11,31 +10,29 @@ export default function CardPost({ id, publication, title, text, banner = '', co
   const publicationDate = dateFormat(publication);
 
   return (
-    <React.Fragment>
-      <Container>
-        <img src={banner} alt='img' />
-        <Header>
-          <HeaderContentContent>
-            <CardText text={title} limit={35} isTitle={true} />
-            <span>Publicado em: {publicationDate}</span>
-          </HeaderContentContent>
-        </Header>
+    <Container>
+      {banner && <img src={banner} alt='img' />}
+      <Header>
+        <HeaderContentContent>
+          <CardText text={title} limit={35} isTitle={true} />
+          <span>Publicado em: {publicationDate}</span>
+        </HeaderContentContent>
+        <HeaderContentInteractions>
+          <div>
+            <CommentButton id={id} route={'post'} />
+            <span>{comments.length}</span>
+          </div>
 
-        <section>
-          <StyledLink to={`/post/${id}`}>
-            <CardText text={text} limit={227} />
-          </StyledLink>
-          <HeaderContentInteractions>
-            <div>
-              <CommentButton id={id} route={'post'} />
-              <span>{comments.length}</span>
-            </div>
+          <LikeButton id={id} likes={likes} type={'post'} />
+        </HeaderContentInteractions>
+      </Header>
 
-            <LikeButton id={id} likes={likes} type={'post'} />
-          </HeaderContentInteractions>
-        </section>
-      </Container>
-    </React.Fragment>
+      <TextContent>
+        <StyledLink to={`/post/${id}`}>
+          <CardText text={text} limit={227} type={'post'} />
+        </StyledLink>
+      </TextContent>
+    </Container>
   );
 }
 

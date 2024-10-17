@@ -13,7 +13,7 @@ export function CommentButton({ id, route }) {
   return (
     <>
       <Button onClick={handleClick}>
-        <FaRegComment size={24} />
+        <FaRegComment size={18} />
       </Button>
     </>
   );

@@ -1,17 +1,22 @@
 import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { Button, CreatePost, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardPost from '../../components/CardPost';
 import api from '../../services/axios';
-import { Button, Form, Input, MyFaRegPaperPlane } from './styled';
 
 export default function Home() {
   const { id: postID } = useParams();
   const [posts, setPosts] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState('');
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    !postID && getAllPost();
+  }, [postID]);
 
   const getAllPost = async () => {
     try {
@@ -40,9 +45,9 @@ export default function Home() {
     }
   };
 
-  React.useEffect(() => {
-    !postID && getAllPost();
-  }, [postID]);
+  const handleNewPost = () => {
+    navigate('/createPost');
+  };
 
   return (
     <MainContent>
@@ -60,8 +65,9 @@ export default function Home() {
       </Form>
 
       <h1>POSTAGENS</h1>
-      <br />
       {loading && <p>Carregando...</p>}
+
+      {!loading && !postID && <CreatePost onClick={handleNewPost}>Criar Postagem</CreatePost>}
 
       {!loading && !postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
 
