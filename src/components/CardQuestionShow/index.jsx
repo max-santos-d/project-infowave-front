@@ -4,6 +4,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser } from './styled';
 import { CardText } from '../CardText';
 import LikeButton from '../LikeButton';
+import CardOptions from '../CardOption';
 
 export default function CardQuestionShow({ id, user = {}, created_at, text, likes }) {
   const data = new Date(created_at);
@@ -21,9 +22,11 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
         </HeaderUser>
 
         <HeaderContentInteractions>
+          <CardOptions text={text} />
           <LikeButton id={id} likes={likes} type={'question'} />
         </HeaderContentInteractions>
       </Header>
+
       <CardText text={text} />
     </Container>
   );

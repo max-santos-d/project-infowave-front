@@ -25,7 +25,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin: 0.5rem 0 0.5rem 0;
   gap: 1rem;
 `;
@@ -35,7 +35,7 @@ export const HeaderUser = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
 
   img {
     width: 40px;
@@ -62,8 +62,8 @@ export const HeaderContent = styled.div`
 
 export const HeaderContentInteractions = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
 
   section {
     cursor: pointer;

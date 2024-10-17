@@ -20,4 +20,4 @@ export const color4 = '#CBF1FC';
 
 export const successColor = '#D4F3EB';
 export const errorColor = '#FEC3D5';
-export const warningColor = '#F3E0D2';
+export const warningColor = '#fde750';

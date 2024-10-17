@@ -16,7 +16,7 @@ export default function Home() {
   const [searchText, setSearchText] = React.useState('');
 
   const userType = useSelector((state) => state.auth.user.userType);
-  const verify = userType.filter((types) => types.type === 'organization').length ? true : false;
+  const verify = userType && userType.filter((types) => types.type === 'organization').length ? true : false;
 
   React.useEffect(() => {
     !postID && getAllPost();
@@ -68,7 +68,7 @@ export default function Home() {
         </Button>
       </Form>
 
-      <h1>POSTAGENS</h1>
+      <h1>INSTITUCIONAL</h1>
       {loading && <p>Carregando...</p>}
 
       {!loading && !postID && verify && <CreatePost onClick={handleNewPost}>Criar Postagem</CreatePost>}

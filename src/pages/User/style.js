@@ -7,7 +7,7 @@ export const UserHeader = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
+  margin-top: 2rem;
   background: ${colors.color3};
   align-items: center;
   border-radius: 3rem 1rem 3rem 1rem;

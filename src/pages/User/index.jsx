@@ -77,8 +77,6 @@ export default function User() {
 
   return (
     <MainContent>
-      <h1>SEU PERFIL</h1>
-
       <UserHeader>
         <Options>
           <UserOptions />
