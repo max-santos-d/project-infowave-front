@@ -11,7 +11,7 @@ export default function CardPost({ id, publication, title, text, banner = '', co
 
   return (
     <Container>
-      {banner && <img src={banner} alt='img' />}
+      <StyledLink to={`/post/${id}`}>{banner && <img src={banner} alt='img' />}</StyledLink>
       <Header>
         <HeaderContentContent>
           <CardText text={title} limit={35} isTitle={true} />

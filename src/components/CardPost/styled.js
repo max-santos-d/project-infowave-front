@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const StyledLink = styled(Link)`
   color: black;
+  width: 100%;
 `;
 
 export const Container = styled.section`
@@ -10,7 +11,7 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
 
   section {
     width: 100%;

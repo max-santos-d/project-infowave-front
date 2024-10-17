@@ -2,17 +2,21 @@ import React from 'react';
 import { MainContent } from '../../styles/GlobalStyled';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 import { Button, CreatePost, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardPost from '../../components/CardPost';
 import api from '../../services/axios';
 
 export default function Home() {
+  const navigate = useNavigate();
   const { id: postID } = useParams();
   const [posts, setPosts] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [searchText, setSearchText] = React.useState('');
-  const navigate = useNavigate();
+
+  const userType = useSelector((state) => state.auth.user.userType);
+  const verify = userType.filter((types) => types.type === 'organization').length ? true : false;
 
   React.useEffect(() => {
     !postID && getAllPost();
@@ -67,7 +71,7 @@ export default function Home() {
       <h1>POSTAGENS</h1>
       {loading && <p>Carregando...</p>}
 
-      {!loading && !postID && <CreatePost onClick={handleNewPost}>Criar Postagem</CreatePost>}
+      {!loading && !postID && verify && <CreatePost onClick={handleNewPost}>Criar Postagem</CreatePost>}
 
       {!loading && !postID && !posts && !posts.length && <p>Nenhum post encontrado!</p>}
 

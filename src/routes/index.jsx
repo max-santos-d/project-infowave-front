@@ -10,6 +10,8 @@ import PostShow from '../components/PostShow';
 import CreateQuestionForm from '../components/CreateQuestionFrom';
 import Community from '../pages/Community';
 import EditUser from '../pages/EditUser';
+import CreatePostForm from '../components/CreatePostFrom';
+import AuthOrgRoute from './AuthOrg.routes';
 
 export default function MainRoutes() {
   return (
@@ -30,6 +32,10 @@ export default function MainRoutes() {
         <Route exact path='/user' element={<User />} />
         <Route exact path='/editUser' element={<EditUser />} />
         <Route exact path='/createQuestion' element={<CreateQuestionForm />} />
+
+        <Route element={<AuthOrgRoute />}>
+          <Route exact path='/createPost' element={<CreatePostForm />} />
+        </Route>
       </Route>
 
       <Route path='*' element={<Page404 />} />
