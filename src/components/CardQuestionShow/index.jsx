@@ -1,4 +1,3 @@
-import React from 'react';
 import P from 'prop-types';
 import { FaUserCircle } from 'react-icons/fa';
 
@@ -11,24 +10,22 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
 
   return (
-    <React.Fragment>
-      <Container>
-        <Header>
-          <HeaderUser>
-            {user.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
-            <HeaderContent>
-              {user._id ? <p>{user.username}</p> : <p>Usuário não identificado</p>}
-              <span>Publicado em: {dateForm}</span>
-            </HeaderContent>
-          </HeaderUser>
+    <Container>
+      <Header>
+        <HeaderUser>
+          {user.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
+          <HeaderContent>
+            {user._id ? <p>{user.username}</p> : <p>Usuário não identificado</p>}
+            <span>Publicado em: {dateForm}</span>
+          </HeaderContent>
+        </HeaderUser>
 
-          <HeaderContentInteractions>
-            <LikeButton id={id} likes={likes} type={'question'} />
-          </HeaderContentInteractions>
-        </Header>
-        <CardText text={text} />
-      </Container>
-    </React.Fragment>
+        <HeaderContentInteractions>
+          <LikeButton id={id} likes={likes} type={'question'} />
+        </HeaderContentInteractions>
+      </Header>
+      <CardText text={text} />
+    </Container>
   );
 }
 

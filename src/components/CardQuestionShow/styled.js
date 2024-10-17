@@ -12,15 +12,11 @@ export const Container = styled.section`
   justify-content: center;
   align-items: flex-start;
   margin: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   p {
-    font-size: 1rem;
-    text-align: justify;
-  }
-
-  span {
     font-size: 0.7rem;
+    text-align: justify;
   }
 `;
 
@@ -47,20 +43,27 @@ export const HeaderUser = styled.div`
     object-fit: cover;
     border-radius: 50%;
   }
+
+  p {
+    font-size: 1rem;
+    text-align: justify;
+  }
+
+  span {
+    font-size: 0.6rem;
+  }
 `;
 
 export const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  margin-left: 1rem;
 `;
 
 export const HeaderContentInteractions = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  padding: 1rem;
 
   section {
     cursor: pointer;

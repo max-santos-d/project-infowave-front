@@ -1,7 +1,7 @@
 import React from 'react';
 import P from 'prop-types';
 
-import { Button, Form, MyFaRegPaperPlane, CommentsSection, Textarea } from './styled';
+import { Button, Form, CommentsSection, Textarea } from './styled';
 import Comments from '../Comments';
 import CardQuestionShow from '../CardQuestionShow';
 import api from '../../services/axios';
@@ -10,8 +10,6 @@ import { toast } from 'react-toastify';
 export default function QuestionShow({ questionID }) {
   const [question, setQuestion] = React.useState({});
   const [comments, setComments] = React.useState([]);
-  //const [commentText, setCommentText] = React.useState('');
-
   const [commentText, setCommentText] = React.useState('');
   const textareaRef = React.useRef(null);
 
@@ -73,13 +71,11 @@ export default function QuestionShow({ questionID }) {
               placeholder='Digite seu comentário aqui...'
             />
 
-            <Button type='submit'>
-              <MyFaRegPaperPlane />
-            </Button>
+            <Button type='submit'>Comentar</Button>
           </Form>
         )}
 
-        {comments.length === 0 && (
+        {question._id && comments.length === 0 && (
           <>
             <br /> <p>Sem comentários!</p>
           </>
