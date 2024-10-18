@@ -13,6 +13,8 @@ export const Container = styled.section`
   align-items: flex-start;
   margin: auto;
   margin-bottom: 2rem;
+  font-size: 0.8rem;
+  text-align: justify;
 
   img {
     width: 100%;
@@ -21,13 +23,8 @@ export const Container = styled.section`
     border-radius: 1rem 1rem 0 0;
   }
 
-  p {
-    font-size: 1rem;
-    text-align: justify;
-  }
-
   span {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 `;
 
@@ -46,4 +43,8 @@ export const HeaderContentContent = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 0.2rem;
+`;
+
+export const TextContent = styled.div`
+  width: 100%;
 `;

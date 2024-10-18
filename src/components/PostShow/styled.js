@@ -5,14 +5,15 @@ import * as colors from '../../config/colors';
 
 export const Form = styled.form`
   display: flex;
-  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid ${colors.color3};
 `;
 
 export const Input = styled.input`
   width: 50%;
   border: 2px solid #ccc;
-  border-radius: 5rem;
-  font-size: 1rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
   padding: 1rem 1rem 1rem 1.5rem;
   transition: width 0.4s ease-in-out;
 
@@ -39,4 +40,5 @@ export const CommentsSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  font-size: 0.8rem;
 `;

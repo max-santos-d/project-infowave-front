@@ -1,7 +1,7 @@
 import React from 'react';
 import P from 'prop-types';
 
-import { Container, Header, HeaderContentContent, StyledLink } from './styled';
+import { Container, Header, HeaderContentContent, TextContent } from './styled';
 import { CardText } from '../CardText';
 import LikeButton from '../LikeButton';
 
@@ -11,7 +11,7 @@ export default function CardShow({ id, publication, title, text, banner = '', li
   return (
     <React.Fragment>
       <Container>
-        <img src={banner} alt='img' />
+        {banner && <img src={banner} alt='img' />}
 
         <Header>
           <HeaderContentContent>
@@ -20,10 +20,9 @@ export default function CardShow({ id, publication, title, text, banner = '', li
           </HeaderContentContent>
           <LikeButton id={id} likes={likes} type={'post'} />
         </Header>
-
-        <StyledLink to={`/post/${id}`}>
+        <TextContent>
           <CardText text={text} />
-        </StyledLink>
+        </TextContent>
       </Container>
     </React.Fragment>
   );
