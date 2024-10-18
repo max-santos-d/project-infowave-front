@@ -11,6 +11,7 @@ export default function CardOptions({ idQuestion, text }) {
   const [deleteToggle, setDeleteToggle] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
   const toggleOptions = () => {
     setShowOptions(!showOptions);
     setDeleteToggle(false);
@@ -24,12 +25,12 @@ export default function CardOptions({ idQuestion, text }) {
     setDeleteToggle(true);
   };
 
-  const handleConfirmDelete = () => {};
+  const handleConfirmDelete = async () => {};
 
   return (
     <Container>
       <ActionButton onClick={toggleOptions}>
-        <FaEllipsisV title='Opções' size={12} />{' '}
+        <FaEllipsisV title='Opções' size={12} />
       </ActionButton>
 
       <ButtonContainer $visible={showOptions}>
