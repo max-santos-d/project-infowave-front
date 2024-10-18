@@ -1,23 +1,23 @@
 import React from 'react';
 import { FaEdit, FaEllipsisV, FaExclamationCircle } from 'react-icons/fa';
 import { FaRectangleXmark } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import P from 'prop-types';
 
 import { ActionButton, ButtonContainer, ConfirmButton, Container } from './style';
 
-export default function CardOptions({ text }) {
+export default function CardOptions({ idQuestion, text }) {
   const [showOptions, setShowOptions] = React.useState(false);
   const [deleteToggle, setDeleteToggle] = React.useState(false);
   const navigate = useNavigate();
-
+  const location = useLocation();
   const toggleOptions = () => {
     setShowOptions(!showOptions);
     setDeleteToggle(false);
   };
 
   const handleEditUser = () => {
-    navigate('/createQuestion', { state: { text: text, action: showOptions } });
+    navigate('/createQuestion', { state: { idQuestion, text, prevPath: location.pathname } });
   };
 
   const handleDelete = () => {
@@ -53,4 +53,5 @@ export default function CardOptions({ text }) {
 
 CardOptions.propTypes = {
   text: P.string.isRequired,
+  idQuestion: P.string.isRequired,
 };

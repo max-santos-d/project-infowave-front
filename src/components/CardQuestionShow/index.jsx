@@ -22,7 +22,7 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
         </HeaderUser>
 
         <HeaderContentInteractions>
-          <CardOptions text={text} />
+          <CardOptions text={text} idQuestion={id} />
           <LikeButton id={id} likes={likes} type={'question'} />
         </HeaderContentInteractions>
       </Header>
