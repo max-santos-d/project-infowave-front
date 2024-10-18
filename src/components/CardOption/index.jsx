@@ -3,6 +3,8 @@ import { FaEdit, FaEllipsisV, FaExclamationCircle } from 'react-icons/fa';
 import { FaRectangleXmark } from 'react-icons/fa6';
 import { useLocation, useNavigate } from 'react-router-dom';
 import P from 'prop-types';
+import { toast } from 'react-toastify';
+import api from '../../services/axios';
 
 import { ActionButton, ButtonContainer, ConfirmButton, Container } from './style';
 
@@ -25,7 +27,16 @@ export default function CardOptions({ idQuestion, text }) {
     setDeleteToggle(true);
   };
 
-  const handleConfirmDelete = async () => {};
+  const handleConfirmDelete = async () => {
+    try {
+      await api.delete(`/question/${idQuestion}`);
+      toast.success('requisição bem sucessida');
+      navigate('/question');
+    } catch (err) {
+      console.log(err);
+      toast.error('erro inesperado ao realizar requisição');
+    }
+  };
 
   return (
     <Container>

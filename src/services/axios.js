@@ -29,11 +29,9 @@ api.interceptors.request.use(
 // Interceptor de resposta para capturar erro de token expirado
 api.interceptors.response.use(
   (response) => {
-    console.log('AXIOS - OK');
     return response;
   },
   async (error) => {
-    console.log('AXIOS - NOT OK');
     console.log(error.response.status === 401);
     if (error.response && error.response.status === 401) {
       //store.dispatch(logoutRequest());
