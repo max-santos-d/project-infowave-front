@@ -1,10 +1,11 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { MainContent } from '../../styles/GlobalStyled';
 import { Form, Textarea } from './style';
 import api from '../../services/axios';
+import { get } from 'lodash';
 
 export default function CreatePostForm() {
   const navigate = useNavigate();
@@ -13,31 +14,44 @@ export default function CreatePostForm() {
   const [title, setTitle] = React.useState('');
   const [text, setText] = React.useState('');
 
+  const location = useLocation();
+  const previousPath = get(location, 'state.prevPath', '/post');
+  const bannerStorage = get(location, 'state.banner', '');
+  const titleStorage = get(location, 'state.title', '');
+  const textStorage = get(location, 'state.text', '');
+  const idPost = get(location, 'state.id', '');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!text.length || !title.length) {
-      console.log(title, text);
-      return toast.error('Titulo e o campo texto são obrigatórios');
-    }
+    if (!text.length || !title.length) return toast.error('Titulo e o campo texto são obrigatórios');
 
     try {
-      await (
-        await api.post('/post', { banner, title, text })
-      ).data;
-      toast.success('Pergunta criada.');
-      navigate('/post');
+      if (idPost) {
+        await api.patch(`/post/${idPost}`, { banner, title, text });
+        toast.success('post atualizado');
+        navigate(previousPath);
+      } else {
+        await api.post('/post', { banner, title, text });
+        navigate(previousPath);
+        toast.success('pergunta criada');
+        navigate('/post');
+      }
     } catch (err) {
       console.log(err);
-      toast.error('Erro ao criar pergunta.');
+      toast.error('erro ao criar pergunta');
     }
   };
 
   React.useEffect(() => {
+    if (!banner && bannerStorage) setBanner(bannerStorage);
+    if (!title && titleStorage) setTitle(titleStorage);
+    if (!text && textStorage) setText(textStorage);
+
     const textarea = textareaRef.current;
     textarea.style.height = 'auto';
     textarea.style.height = `${textarea.scrollHeight}px`;
-  }, [text]);
+  }, [text, banner, title, bannerStorage, titleStorage, textStorage]);
 
   return (
     <MainContent>

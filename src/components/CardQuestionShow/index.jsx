@@ -28,7 +28,7 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
         </HeaderUser>
 
         <HeaderContentInteractions>
-          {verifyUser && <CardOptions text={text} idQuestion={id} />}
+          {verifyUser && <CardOptions information={text} id={id} type={'question'} />}
           <LikeButton id={id} likes={likes} type={'question'} />
         </HeaderContentInteractions>
       </Header>

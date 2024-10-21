@@ -16,7 +16,7 @@ export const Container = styled.section`
     transition: 0.2s ease-in-out;
 
     &:hover {
-      background: ${colors.warningColor};
+      background: ${colors.color4};
     }
   }
 `;

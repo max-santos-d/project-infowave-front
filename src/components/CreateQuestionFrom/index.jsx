@@ -14,14 +14,12 @@ export default function CreateQuestionForm() {
   const location = useLocation();
   const previousPath = get(location, 'state.prevPath', '/question');
   const textStorage = get(location, 'state.text', '');
-  const idQuestion = get(location, 'state.idQuestion', '');
+  const idQuestion = get(location, 'state.id', '');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!text.length) {
-      return toast.error('Nenhum texto inserido.');
-    }
+    if (!text.length) return toast.error('Nenhum texto inserido.');
 
     try {
       if (idQuestion) {

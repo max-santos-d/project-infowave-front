@@ -2,13 +2,13 @@ import React from 'react';
 import { FaEdit, FaEllipsisV, FaExclamationCircle } from 'react-icons/fa';
 import { FaRectangleXmark } from 'react-icons/fa6';
 import { useLocation, useNavigate } from 'react-router-dom';
-import P from 'prop-types';
+import P, { object, string } from 'prop-types';
 import { toast } from 'react-toastify';
 import api from '../../services/axios';
 
-import { ActionButton, ButtonContainer, ConfirmButton, Container } from './style';
+import { ActionButton, ButtonContainer, ConfirmButton, Container, OptionButton } from './style';
 
-export default function CardOptions({ idQuestion, text }) {
+export default function CardOptions({ id, information, type }) {
   const [showOptions, setShowOptions] = React.useState(false);
   const [deleteToggle, setDeleteToggle] = React.useState(false);
   const navigate = useNavigate();
@@ -19,43 +19,66 @@ export default function CardOptions({ idQuestion, text }) {
     setDeleteToggle(false);
   };
 
-  const handleEditUser = () => {
-    navigate('/createQuestion', { state: { idQuestion, text, prevPath: location.pathname } });
+  const handleEditQuestion = () => {
+    navigate('/createQuestion', { state: { id, text: information, prevPath: location.pathname } });
   };
 
-  const handleDelete = () => {
-    setDeleteToggle(true);
+  const handleEditPost = () => {
+    navigate('/createPost', {
+      state: {
+        id,
+        banner: information.banner,
+        title: information.title,
+        text: information.text,
+        prevPath: location.pathname,
+      },
+    });
   };
 
-  const handleConfirmDelete = async () => {
+  const handleConfirmDeletePost = async () => {
     try {
-      await api.delete(`/question/${idQuestion}`);
+      await api.delete(`/post/${id}`);
       toast.success('requisição bem sucessida');
-      navigate('/question');
+      navigate('/post', { replace: true });
     } catch (err) {
       console.log(err);
       toast.error('erro inesperado ao realizar requisição');
     }
   };
 
+  const handleConfirmDeleteQuestion = async () => {
+    try {
+      await api.delete(`/question/${id}`);
+      toast.success('requisição bem sucessida');
+      navigate('/post', { replace: true });
+    } catch (err) {
+      console.log(err);
+      toast.error('erro inesperado ao realizar requisição');
+    }
+  };
+
+  const handleConfirm = () => {
+    setDeleteToggle(true);
+  };
+
   return (
     <Container>
-      <ActionButton onClick={toggleOptions}>
-        <FaEllipsisV title='Opções' size={12} />
-      </ActionButton>
+      <OptionButton onClick={toggleOptions}>
+        <FaEllipsisV title='opções' size={12} />
+      </OptionButton>
 
       <ButtonContainer $visible={showOptions}>
-        <ActionButton onClick={handleEditUser}>
-          <FaEdit title='Editar' size={12} />
+        <ActionButton onClick={type === 'question' ? handleEditQuestion : handleEditPost}>
+          <FaEdit title='editar' size={12} />
         </ActionButton>
 
         {deleteToggle ? (
-          <ConfirmButton onClick={handleConfirmDelete}>
-            <FaExclamationCircle title='Confirmar' size={12} />
+          <ConfirmButton onClick={type === 'question' ? handleConfirmDeleteQuestion : handleConfirmDeletePost}>
+            <FaExclamationCircle title='confirmar' size={12} />
           </ConfirmButton>
         ) : (
-          <ActionButton onClick={handleDelete}>
-            <FaRectangleXmark title='Apagar' size={12} />
+          <ActionButton onClick={handleConfirm}>
+            <FaRectangleXmark title='apagar' size={12} />
           </ActionButton>
         )}
       </ButtonContainer>
@@ -64,6 +87,7 @@ export default function CardOptions({ idQuestion, text }) {
 }
 
 CardOptions.propTypes = {
-  text: P.string.isRequired,
-  idQuestion: P.string.isRequired,
+  information: P.oneOfType([object, string]),
+  id: P.string.isRequired,
+  type: P.string.isRequired,
 };

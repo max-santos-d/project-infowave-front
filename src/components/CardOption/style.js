@@ -11,7 +11,7 @@ export const ButtonContainer = styled.div`
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background: ${colors.white};
   border: 1px solid ${colors.color2};
   border-radius: 0.2rem 1.5rem 1rem 1.5rem;
   margin: -0.8rem 0 0 2rem;
@@ -38,6 +38,28 @@ export const ActionButton = styled.button`
   transition: 0.2s ease-in-out;
 
   &:hover {
+    background: ${colors.color3};
+  }
+`;
+
+export const OptionButton = styled.button`
+  display: flex;
+  justify-content: flex-end;
+  background: none;
+  color: ${colors.black};
+  border: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  margin-bottom: 5px;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    color: ${colors.white};
+    background: ${colors.color3};
+  }
+
+  &:focus {
+    color: ${colors.white};
     background: ${colors.color3};
   }
 `;
