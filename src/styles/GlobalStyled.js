@@ -11,7 +11,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: sans-serif;
+    font-family:  "Comic Sans MS", "Comic Sans", cursive;
     background: ${colors.white};
   }
 

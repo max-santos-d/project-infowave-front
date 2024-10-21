@@ -20,16 +20,17 @@ export default function CardShow({ id, publication, title, text, banner = '', li
 
         <Header>
           <HeaderContentContent>
-            <CardText text={title} isTitle={true} />
+            <CardText text={title} textSize={1} isTitle={true} />
             <span>Publicado em: {dateForm}</span>
           </HeaderContentContent>
+
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {verify && <CardOptions id={id} information={{ text, title, banner }} type={'post'} />}
             <LikeButton id={id} likes={likes} type={'post'} />
           </div>
         </Header>
         <TextContent>
-          <CardText text={text} />
+          <CardText text={text} type={'post'} />
         </TextContent>
       </Container>
     </React.Fragment>

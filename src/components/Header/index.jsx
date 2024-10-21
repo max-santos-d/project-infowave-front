@@ -2,9 +2,13 @@ import { FaHome, FaUserAlt, FaRegComments } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import { Nav } from './style';
-import { FaLocationDot } from 'react-icons/fa6';
+import { FaGear, FaLocationDot } from 'react-icons/fa6';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
+  const userType = useSelector((state) => state.auth.user.userType);
+  const verify = userType && userType.filter((types) => types.type === 'administration').length ? true : false;
+
   return (
     <Nav>
       <Link to='/post'>
@@ -22,6 +26,12 @@ export default function Header() {
       <Link to='/user'>
         <FaUserAlt size={24} />
       </Link>
+
+      {verify && (
+        <Link to='/adm'>
+          <FaGear size={24} />
+        </Link>
+      )}
     </Nav>
   );
 }

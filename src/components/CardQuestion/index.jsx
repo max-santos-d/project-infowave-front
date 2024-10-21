@@ -12,14 +12,16 @@ export default function CardQuestion({ id, text, user = {}, comments, likes, cre
   return (
     <Container>
       <HeaderUser>
-        <div>
-          {user?.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
+        <StyledLink to={`/question/${id}`}>
+          <div>
+            {user?.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
 
-          <HeaderContent>
-            {user?._id ? <p>{user.username}</p> : <p>Usuário não identificado</p>}
-            <span>Publicado em: {publicationDate}</span>
-          </HeaderContent>
-        </div>
+            <HeaderContent>
+              {user?._id ? <p>{user.username}</p> : <p>Usuário não identificado</p>}
+              <span>Publicado em: {publicationDate}</span>
+            </HeaderContent>
+          </div>
+        </StyledLink>
 
         <ContentInteractions>
           <div>
@@ -30,9 +32,7 @@ export default function CardQuestion({ id, text, user = {}, comments, likes, cre
         </ContentInteractions>
       </HeaderUser>
 
-      <StyledLink to={`/question/${id}`}>
-        <CardText text={text} limit={227} />
-      </StyledLink>
+      <CardText text={text} type={'card'} />
     </Container>
   );
 }

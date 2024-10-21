@@ -14,7 +14,7 @@ export default function CardPost({ id, publication, title, text, banner = '', co
       <StyledLink to={`/post/${id}`}>{banner && <img src={banner} alt='img' />}</StyledLink>
       <Header>
         <HeaderContentContent>
-          <CardText text={title} limit={35} isTitle={true} />
+          <CardText text={title} textSize={1} isTitle={true} />
           <span>Publicado em: {publicationDate}</span>
         </HeaderContentContent>
         <HeaderContentInteractions>
@@ -28,9 +28,7 @@ export default function CardPost({ id, publication, title, text, banner = '', co
       </Header>
 
       <TextContent>
-        <StyledLink to={`/post/${id}`}>
-          <CardText text={text} limit={227} type={'post'} />
-        </StyledLink>
+        <CardText text={text} type={'post'} />
       </TextContent>
     </Container>
   );

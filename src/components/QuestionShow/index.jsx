@@ -45,6 +45,7 @@ export default function QuestionShow({ questionID }) {
 
     try {
       const { response } = await (await api.post(`/questionMessage/${questionID}`, { comment: commentText })).data;
+      console.log(response);
       setComments(response.comments);
       toast.success('comentário realizado');
       setCommentText('');
@@ -85,7 +86,6 @@ export default function QuestionShow({ questionID }) {
     setCommentText(initialComment);
   }, [questionID, getQuestion, navigate, initialComment]);
 
-  console.log(question.comments);
   return (
     <React.Fragment>
       {loading && <p>Carregando...</p>}
