@@ -50,7 +50,7 @@ export default function CardOptions({ id, information, type }) {
     try {
       await api.delete(`/question/${id}`);
       toast.success('requisição bem sucessida');
-      navigate('/post', { replace: true });
+      navigate('/question', { replace: true });
     } catch (err) {
       console.log(err);
       toast.error('erro inesperado ao realizar requisição');

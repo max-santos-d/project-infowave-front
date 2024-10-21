@@ -85,6 +85,7 @@ export default function QuestionShow({ questionID }) {
     setCommentText(initialComment);
   }, [questionID, getQuestion, navigate, initialComment]);
 
+  console.log(question.comments);
   return (
     <React.Fragment>
       {loading && <p>Carregando...</p>}
@@ -119,10 +120,10 @@ export default function QuestionShow({ questionID }) {
 
             {comments.length === 0 && <p>Sem comentários!</p>}
 
-            {question.comment &&
+            {question.comments &&
               comments.length > 0 &&
               comments.map((comment) => (
-                <Comments key={comment._id} text={comment.comment} user={comment.user} createdAt={comment.created_at} />
+                <Comments key={comment._id} text={comment.text} user={comment.user} createdAt={comment.created_at} />
               ))}
           </CommentsSection>
         </React.Fragment>

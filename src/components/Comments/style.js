@@ -30,4 +30,5 @@ export const CommentContent = styled.div`
   margin-bottom: 1rem;
   overflow-wrap: break-word;
   word-break: break-word;
+  font-size: 0.7rem;
 `;
