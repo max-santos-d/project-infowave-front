@@ -11,10 +11,10 @@ import { get } from 'lodash';
 export default function CardQuestionShow({ id, user = {}, created_at, text, likes }) {
   const data = new Date(created_at);
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
+
   const authState = useSelector((state) => state.auth);
-  const userStorage = get(authState, 'user._id', '{}');
-  const userPost = get(user, '_id', '');
-  const verifyUser = userStorage && userPost && userStorage === userPost && true;
+  const userStorage = get(authState, 'user', '{}');
+  const verifyUserLogged = userStorage && true;
 
   return (
     <Container>
@@ -28,7 +28,7 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
         </HeaderUser>
 
         <HeaderContentInteractions>
-          {verifyUser && <CardOptions information={text} id={id} type={'question'} />}
+          {verifyUserLogged && <CardOptions userCard={user} information={text} id={id} type={'question'} />}
           <LikeButton id={id} likes={likes} type={'question'} />
         </HeaderContentInteractions>
       </Header>

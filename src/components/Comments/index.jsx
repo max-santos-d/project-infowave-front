@@ -1,7 +1,8 @@
 import P from 'prop-types';
 import { FaUserCircle } from 'react-icons/fa';
-import dateFormat from '../../config/dateFormat';
+
 import { CommentContent, Header, HeaderContent } from './style';
+import dateFormat from '../../config/dateFormat';
 
 export default function Comments({ text, user, createdAt }) {
   const publicationDate = dateFormat(createdAt);
@@ -9,11 +10,13 @@ export default function Comments({ text, user, createdAt }) {
   return (
     <>
       <Header>
-        {user.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
-
         <HeaderContent>
-          <p>{user.username}</p>
-          <span>{publicationDate}</span>
+          {user.avatar ? <img src={user.avatar} alt='User avatar' /> : <FaUserCircle size={40} />}
+
+          <div>
+            <p>{user.username}</p>
+            <span>{publicationDate}</span>
+          </div>
         </HeaderContent>
       </Header>
 

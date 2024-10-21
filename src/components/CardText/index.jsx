@@ -11,7 +11,6 @@ export function CardText({ text, limit = 3, isTitle = false, textSize = 0.8, typ
 
   const [expanded, setExpanded] = React.useState(false);
 
-  console.log(limit);
   const toggleExpansion = () => {
     setExpanded(!expanded);
   };
