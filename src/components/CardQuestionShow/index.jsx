@@ -5,10 +5,16 @@ import { Container, Header, HeaderContent, HeaderContentInteractions, HeaderUser
 import { CardText } from '../CardText';
 import LikeButton from '../LikeButton';
 import CardOptions from '../CardOption';
+import { useSelector } from 'react-redux';
+import { get } from 'lodash';
 
 export default function CardQuestionShow({ id, user = {}, created_at, text, likes }) {
   const data = new Date(created_at);
   const dateForm = data.getDate() + '-' + (data.getMonth() + 1) + '-' + data.getFullYear();
+  const authState = useSelector((state) => state.auth);
+  const userStorage = get(authState, 'user._id', '{}');
+  const userPost = get(user, '_id', '');
+  const verifyUser = userStorage && userPost && userStorage === userPost && true;
 
   return (
     <Container>
@@ -22,7 +28,7 @@ export default function CardQuestionShow({ id, user = {}, created_at, text, like
         </HeaderUser>
 
         <HeaderContentInteractions>
-          <CardOptions text={text} idQuestion={id} />
+          {verifyUser && <CardOptions text={text} idQuestion={id} />}
           <LikeButton id={id} likes={likes} type={'question'} />
         </HeaderContentInteractions>
       </Header>
@@ -40,6 +46,5 @@ CardQuestionShow.propTypes = {
   title: P.string,
   text: P.string.isRequired,
   banner: P.string,
-  comments: P.number.isRequired,
   likes: P.array.isRequired,
 };

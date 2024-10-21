@@ -13,8 +13,8 @@ function* LoginRequest({ payload }) {
     toast.success('Login realizado.');
 
     if (payload.navigate) {
-      const { previousPath, navigate } = payload;
-      navigate(previousPath, { replace: true });
+      const { previousPath, navigate, text } = payload;
+      return navigate(previousPath, { state: { text }, replace: true });
     }
   } catch (err) {
     console.log(err);

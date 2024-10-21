@@ -32,9 +32,7 @@ api.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log(error.response.status === 401);
     if (error.response && error.response.status === 401) {
-      //store.dispatch(logoutRequest());
       store.dispatch(actions.loginFailure());
     }
     return Promise.reject(error);

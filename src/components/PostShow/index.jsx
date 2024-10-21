@@ -1,6 +1,6 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import { Button, CommentsSection, Form, Input, MyFaRegPaperPlane } from './styled';
 import CardShow from '../CardShow';
@@ -14,86 +14,96 @@ export default function PostShow() {
   const [comments, setComments] = React.useState([]);
   const [commentText, setCommentText] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const getPost = async (postID) => {
-    try {
-      setLoading(true);
-      const { response } = await (await api.get(`/post/${postID}`)).data;
-      setPost(response);
-      setComments(response.comments);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      toast.error('Erro ao carregar posts');
-      setLoading(false);
-    }
-  };
+  const getPost = React.useCallback(
+    async (postID) => {
+      try {
+        setLoading(true);
+        const { response } = await (await api.get(`/post/${postID}`)).data;
+        setPost(response);
+        setComments(response.comments);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        toast.error('erro ao carregar posts');
+        setLoading(false);
+        navigate('/', { replace: true });
+      }
+    },
+    [navigate]
+  );
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const { response } = await (await api.post(`/postMessage/${postID}`, { comment: commentText })).data;
       setComments(response.comments);
-      toast.success('Comentário realizado');
+      toast.success('comentário realizado');
       setCommentText('');
     } catch (err) {
       console.log(err);
-      toast.error('Erro ao comentar.');
+      if (err.status === 401) {
+        toast.error('sem autorização para realização requisição, faça ou crie um login');
+        return navigate('/auth', { state: { previousPath: location.pathname }, replace: true });
+      }
+      toast.error('erro inesperado ao comentar.');
     }
   };
 
   React.useEffect(() => {
-    postID && getPost(postID);
-  }, [postID]);
+    if (!postID) {
+      toast.error('post não encontrado');
+      navigate('/', { replace: true });
+    }
+    getPost(postID);
+  }, [postID, getPost, navigate]);
 
   return (
     <MainContent>
       {loading && <p>Carregando...</p>}
 
-      {!loading && post._id && (
-        <CardShow
-          key={post._id}
-          id={post._id}
-          publication={post.created_at}
-          title={post.title}
-          text={post.text}
-          banner={post.banner}
-          comments={post.comments.length}
-          likes={post.likes}
-        />
-      )}
-
-      <CommentsSection>
-        {!loading && post._id && <p>Comentários:</p>}
-
-        {!loading && post._id && (
-          <Form onSubmit={handleSubmit}>
-            <Input
-              type='text'
-              value={commentText}
-              onChange={(event) => setCommentText(event.target.value)}
-              placeholder='Comentar'
+      {!loading && (
+        <>
+          {post._id && (
+            <CardShow
+              key={post._id}
+              id={post._id}
+              publication={post.created_at}
+              title={post.title}
+              text={post.text}
+              banner={post.banner}
+              likes={post.likes}
             />
+          )}
 
-            <Button type='submit'>
-              <MyFaRegPaperPlane />
-            </Button>
-          </Form>
-        )}
+          <CommentsSection>
+            {<p>Comentários: {comments.length}</p>}
 
-        {!loading && comments.length === 0 && (
-          <>
-            <br /> <p>Sem comentários!</p>
-          </>
-        )}
+            <Form onSubmit={handleSubmit}>
+              <Input
+                type='text'
+                value={commentText}
+                onChange={(event) => setCommentText(event.target.value)}
+                placeholder='Comentar'
+              />
 
-        {!loading &&
-          comments.length > 0 &&
-          post.comments &&
-          comments.map((comment) => (
-            <Comments key={comment._id} text={comment.text} user={comment.user} createdAt={comment.createdAt} />
-          ))}
-      </CommentsSection>
+              <Button type='submit'>
+                <MyFaRegPaperPlane />
+              </Button>
+            </Form>
+
+            {comments.length === 0 && <p>Sem comentários!</p>}
+
+            {post.comments &&
+              comments.length > 0 &&
+              comments.map((comment) => (
+                <Comments key={comment._id} text={comment.text} user={comment.user} createdAt={comment.created_at} />
+              ))}
+          </CommentsSection>
+        </>
+      )}
     </MainContent>
   );
 }

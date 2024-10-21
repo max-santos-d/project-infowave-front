@@ -9,24 +9,6 @@ export const Form = styled.form`
   align-items: flex-end;
 `;
 
-export const Textarea = styled.textarea`
-  width: 100%;
-  min-height: 100%;
-  resize: none;
-  padding: 1rem;
-  font-size: 1rem;
-  border-radius: 0.4rem;
-  border: 1px solid ${colors.color2};
-  box-sizing: border-box;
-  overflow: hidden;
-  font-size: 0.8rem;
-
-  &:focus {
-    outline: none;
-    border-color: ${colors.color1};
-  }
-`;
-
 export const MyFaRegPaperPlane = styled(FaRegPaperPlane)`
   font-size: 2rem;
   padding: 0.5rem;
@@ -55,5 +37,23 @@ export const CommentsSection = styled.section`
 
   p {
     font-size: 0.8rem;
+  }
+`;
+
+export const AutoResizeTextarea = styled.textarea`
+  width: 100%;
+  min-height: 100%;
+  resize: none;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid ${colors.color2};
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 0.8rem;
+
+  &:focus {
+    outline: none;
+    border-color: ${colors.color1};
   }
 `;

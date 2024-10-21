@@ -15,6 +15,7 @@ export default function Login() {
   const [password, setPassword] = React.useState('');
   const location = useLocation();
   const previousPath = get(location, 'state.previousPath', '/post');
+  const text = get(location, 'state.text', '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ export default function Login() {
 
     if (formErrors) return;
 
-    dispatch(actions.loginRequest({ login, password, navigate, previousPath }));
+    dispatch(actions.loginRequest({ login, password, navigate, previousPath, text }));
   };
 
   return (
