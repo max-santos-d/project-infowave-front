@@ -10,7 +10,7 @@ import { get } from 'lodash';
 
 import { ActionButton, ButtonContainer, ConfirmButton, Container, OptionButton } from './style';
 
-export default function CardOptions({ id, userCard, information, type }) {
+export default function CardOptions({ id, userCard = {}, information, type }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [showOptions, setShowOptions] = React.useState(false);
@@ -18,6 +18,12 @@ export default function CardOptions({ id, userCard, information, type }) {
   const [banToggle, setBanToggle] = React.useState(false);
   const authState = useSelector((state) => state.auth);
   const userStorage = get(authState, 'user', '{}');
+
+  const userType = useSelector((state) => state.auth.user.userType);
+
+  const verifyUser = userStorage._id === userCard._id;
+  const verifyOrganization =
+    userType && userType.filter((types) => types.type === 'organization').length ? true : false;
 
   const toggleOptions = () => {
     setShowOptions(!showOptions);
@@ -62,9 +68,21 @@ export default function CardOptions({ id, userCard, information, type }) {
     }
   };
 
-  const handleBan = async () => {
+  const handleBanQuestion = async () => {
     try {
       await api.patch(`/report/question/${id}`);
+      toast.success('requisição bem sucessida - ban');
+      setShowOptions(!showOptions);
+      setDeleteToggle(false);
+      setBanToggle(false);
+    } catch (err) {
+      console.log(err);
+      toast.error('erro inesperado ao realizar requisição');
+    }
+  };
+
+  const handleBanPost = async () => {
+    try {
       toast.success('requisição bem sucessida - ban');
       setShowOptions(!showOptions);
       setDeleteToggle(false);
@@ -90,33 +108,67 @@ export default function CardOptions({ id, userCard, information, type }) {
       </OptionButton>
 
       <ButtonContainer $visible={showOptions}>
-        {userStorage._id === userCard._id && (
-          <ActionButton onClick={type === 'question' ? handleEditQuestion : handleEditPost}>
-            <FaEdit title='editar' size={12} />
-          </ActionButton>
+        {type === 'post' && (
+          <>
+            {verifyOrganization ? (
+              <>
+                <ActionButton onClick={handleEditPost}>
+                  <FaEdit title='editar' size={12} />
+                </ActionButton>
+
+                {deleteToggle ? (
+                  <ConfirmButton onClick={handleConfirmDeletePost}>
+                    <FaExclamationCircle title='confirmar' size={12} />
+                  </ConfirmButton>
+                ) : (
+                  <ActionButton onClick={handleConfirm}>
+                    <FaRectangleXmark title='apagar' size={12} />
+                  </ActionButton>
+                )}
+              </>
+            ) : banToggle ? (
+              <ConfirmButton onClick={handleBanPost}>
+                <FaExclamationCircle title='confirmar' size={12} />
+              </ConfirmButton>
+            ) : (
+              <ActionButton onClick={handleConfirmBan}>
+                <FaBan title='reportar' size={12} />
+              </ActionButton>
+            )}
+          </>
         )}
 
-        {userStorage._id === userCard._id &&
-          (deleteToggle ? (
-            <ConfirmButton onClick={type === 'question' ? handleConfirmDeleteQuestion : handleConfirmDeletePost}>
-              <FaExclamationCircle title='confirmar' size={12} />
-            </ConfirmButton>
-          ) : (
-            <ActionButton onClick={handleConfirm}>
-              <FaRectangleXmark title='apagar' size={12} />
-            </ActionButton>
-          ))}
+        {type === 'question' && (
+          <>
+            {verifyUser && (
+              <ActionButton onClick={handleEditQuestion}>
+                <FaEdit title='editar' size={12} />
+              </ActionButton>
+            )}
 
-        {userStorage._id !== userCard._id &&
-          (banToggle ? (
-            <ConfirmButton onClick={handleBan}>
-              <FaExclamationCircle title='confirmar' size={12} />
-            </ConfirmButton>
-          ) : (
-            <ActionButton onClick={handleConfirmBan}>
-              <FaBan title='reportar' size={12} />
-            </ActionButton>
-          ))}
+            {verifyUser &&
+              (deleteToggle ? (
+                <ConfirmButton onClick={handleConfirmDeleteQuestion}>
+                  <FaExclamationCircle title='confirmar' size={12} />
+                </ConfirmButton>
+              ) : (
+                <ActionButton onClick={handleConfirm}>
+                  <FaRectangleXmark title='apagar' size={12} />
+                </ActionButton>
+              ))}
+
+            {!verifyUser &&
+              (banToggle ? (
+                <ConfirmButton onClick={handleBanQuestion}>
+                  <FaExclamationCircle title='confirmar' size={12} />
+                </ConfirmButton>
+              ) : (
+                <ActionButton onClick={handleConfirmBan}>
+                  <FaBan title='reportar' size={12} />
+                </ActionButton>
+              ))}
+          </>
+        )}
       </ButtonContainer>
     </Container>
   );
@@ -125,6 +177,6 @@ export default function CardOptions({ id, userCard, information, type }) {
 CardOptions.propTypes = {
   information: P.oneOfType([object, string]),
   id: P.string.isRequired,
-  userCard: P.object.isRequired,
+  userCard: P.object,
   type: P.string.isRequired,
 };
