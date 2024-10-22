@@ -6,7 +6,16 @@ import dateFormat from '../../config/dateFormat';
 import LikeButton from '../LikeButton';
 import { CommentButton } from '../CommentButton';
 
-export default function CardPost({ id, publication, title, text, banner = '', comments, likes }) {
+export default function CardPost({
+  id,
+  publication,
+  title,
+  text,
+  banner = '',
+  comments = [],
+  likes = [],
+  fromAdm = false,
+}) {
   const publicationDate = dateFormat(publication);
 
   return (
@@ -19,11 +28,14 @@ export default function CardPost({ id, publication, title, text, banner = '', co
         </HeaderContentContent>
         <HeaderContentInteractions>
           <div>
-            <CommentButton id={id} route={'post'} />
-            <span>{comments.length}</span>
+            {!fromAdm && (
+              <>
+                <CommentButton id={id} route={'post'} />
+                <span>{comments.length}</span>
+              </>
+            )}
           </div>
-
-          <LikeButton id={id} likes={likes} type={'post'} />
+          {!fromAdm && <LikeButton id={id} likes={likes} type={'post'} />}
         </HeaderContentInteractions>
       </Header>
 
@@ -40,6 +52,7 @@ CardPost.propTypes = {
   title: P.string,
   text: P.string.isRequired,
   banner: P.string,
-  comments: P.array.isRequired,
-  likes: P.array.isRequired,
+  comments: P.array,
+  likes: P.array,
+  fromAdm: P.bool,
 };

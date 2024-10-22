@@ -6,7 +6,7 @@ import { CardText } from '../CardText';
 import dateFormat from '../../config/dateFormat';
 import LikeButton from '../LikeButton';
 
-export default function CardQuestion({ id, text, user = {}, comments, likes, created_at }) {
+export default function CardQuestion({ id, text, user = {}, comments = [], likes = [], created_at, fromAdm = false }) {
   const publicationDate = dateFormat(created_at);
 
   return (
@@ -25,10 +25,14 @@ export default function CardQuestion({ id, text, user = {}, comments, likes, cre
 
         <ContentInteractions>
           <div>
-            <FaRegComment size={18} />
-            <span>{comments.length}</span>
+            {!fromAdm > 0 && (
+              <>
+                <FaRegComment size={18} />
+                <span>{comments.length}</span>
+              </>
+            )}
           </div>
-          <LikeButton id={id} likes={likes} type={'question'} />
+          {!fromAdm && <LikeButton id={id} likes={likes} type={'question'} />}
         </ContentInteractions>
       </HeaderUser>
 
@@ -41,7 +45,8 @@ CardQuestion.propTypes = {
   id: P.string.isRequired,
   created_at: P.string.isRequired,
   text: P.string.isRequired,
-  comments: P.array.isRequired,
-  likes: P.array.isRequired,
+  comments: P.array,
+  likes: P.array,
   user: P.object,
+  fromAdm: P.bool,
 };

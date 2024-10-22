@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBan, FaEdit, FaEllipsisV, FaExclamationCircle } from 'react-icons/fa';
+import { FaBan, FaCheckCircle, FaEdit, FaEllipsisV, FaExclamationCircle } from 'react-icons/fa';
 import { FaRectangleXmark } from 'react-icons/fa6';
 import { useLocation, useNavigate } from 'react-router-dom';
 import P, { object, string } from 'prop-types';
@@ -24,6 +24,8 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
   const verifyUser = userStorage._id === userCard._id;
   const verifyOrganization =
     userType && userType.filter((types) => types.type === 'organization').length ? true : false;
+  const verifyAdministration =
+    userType && userType.filter((types) => types.type === 'administration').length ? true : false;
 
   const toggleOptions = () => {
     setShowOptions(!showOptions);
@@ -48,7 +50,8 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
 
   const handleConfirmDeletePost = async () => {
     try {
-      await api.delete(`/post/${id}`);
+      if (verifyAdministration) await api.delete(`/admReqForPost/${id}`);
+      else await api.delete(`/post/${id}`);
       toast.success('requisição bem sucessida');
       navigate('/post', { replace: true });
     } catch (err) {
@@ -59,7 +62,8 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
 
   const handleConfirmDeleteQuestion = async () => {
     try {
-      await api.delete(`/question/${id}`);
+      if (verifyAdministration) await api.delete(`/admReqForQuestion/${id}`);
+      else await api.delete(`/question/${id}`);
       toast.success('requisição bem sucessida');
       navigate('/question', { replace: true });
     } catch (err) {
@@ -71,7 +75,7 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
   const handleBanQuestion = async () => {
     try {
       await api.patch(`/report/question/${id}`);
-      toast.success('requisição bem sucessida - ban');
+      toast.success('requisição bem sucessida - reportado');
       setShowOptions(!showOptions);
       setDeleteToggle(false);
       setBanToggle(false);
@@ -83,10 +87,39 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
 
   const handleBanPost = async () => {
     try {
-      toast.success('requisição bem sucessida - ban');
+      await api.patch(`/report/post/${id}`);
+      toast.success('requisição bem sucessida - reportado');
       setShowOptions(!showOptions);
       setDeleteToggle(false);
       setBanToggle(false);
+    } catch (err) {
+      console.log(err);
+      toast.error('erro inesperado ao realizar requisição');
+    }
+  };
+
+  const handleClearRepostsQuestion = async () => {
+    try {
+      await api.patch(`/admReqForQuestion/${id}`);
+      toast.success('denuncias apagadas');
+      setShowOptions(!showOptions);
+      setDeleteToggle(false);
+      setBanToggle(false);
+      navigate('/adm');
+    } catch (err) {
+      console.log(err);
+      toast.error('erro inesperado ao realizar requisição');
+    }
+  };
+
+  const handleClearRepostsPost = async () => {
+    try {
+      await api.patch(`/admReqForPost/${id}`);
+      toast.success('denuncias apagadas');
+      setShowOptions(!showOptions);
+      setDeleteToggle(false);
+      setBanToggle(false);
+      navigate('/adm');
     } catch (err) {
       console.log(err);
       toast.error('erro inesperado ao realizar requisição');
@@ -135,6 +168,24 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
                 <FaBan title='reportar' size={12} />
               </ActionButton>
             )}
+
+            {verifyAdministration &&
+              !verifyOrganization &&
+              (deleteToggle ? (
+                <ConfirmButton onClick={handleConfirmDeletePost}>
+                  <FaExclamationCircle title='confirmar' size={12} />
+                </ConfirmButton>
+              ) : (
+                <ActionButton onClick={handleConfirm}>
+                  <FaRectangleXmark title='apagar' size={12} />
+                </ActionButton>
+              ))}
+
+            {verifyAdministration && (
+              <ActionButton onClick={handleClearRepostsPost}>
+                <FaCheckCircle title='limpar denuncias' size={12} />
+              </ActionButton>
+            )}
           </>
         )}
 
@@ -147,6 +198,7 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
             )}
 
             {verifyUser &&
+              !verifyAdministration &&
               (deleteToggle ? (
                 <ConfirmButton onClick={handleConfirmDeleteQuestion}>
                   <FaExclamationCircle title='confirmar' size={12} />
@@ -167,6 +219,23 @@ export default function CardOptions({ id, userCard = {}, information, type }) {
                   <FaBan title='reportar' size={12} />
                 </ActionButton>
               ))}
+
+            {verifyAdministration &&
+              (deleteToggle ? (
+                <ConfirmButton onClick={handleConfirmDeleteQuestion}>
+                  <FaExclamationCircle title='confirmar' size={12} />
+                </ConfirmButton>
+              ) : (
+                <ActionButton onClick={handleConfirm}>
+                  <FaRectangleXmark title='apagar' size={12} />
+                </ActionButton>
+              ))}
+
+            {verifyAdministration && (
+              <ActionButton onClick={handleClearRepostsQuestion}>
+                <FaCheckCircle title='limpar denuncias' size={12} />
+              </ActionButton>
+            )}
           </>
         )}
       </ButtonContainer>

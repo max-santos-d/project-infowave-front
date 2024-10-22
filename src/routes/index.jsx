@@ -1,17 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
 
+import AuthOrgRoute from './AuthOrg.routes';
+import AuthAdmRoute from './AuthAdm.routes';
 import AuthRoute from './Auth.routes';
+
 import Page404 from '../pages/Page404';
 import Home from '../pages/Home';
 import User from '../pages/User';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import PostShow from '../components/PostShow';
-import CreateQuestionForm from '../components/CreateQuestionFrom';
 import Community from '../pages/Community';
+import Adm from '../pages/Adm';
 import EditUser from '../pages/EditUser';
+
 import CreatePostForm from '../components/CreatePostFrom';
-import AuthOrgRoute from './AuthOrg.routes';
+import CreateQuestionForm from '../components/CreateQuestionFrom';
+import PostShow from '../components/PostShow';
 
 export default function MainRoutes() {
   return (
@@ -35,6 +39,10 @@ export default function MainRoutes() {
 
         <Route element={<AuthOrgRoute />}>
           <Route exact path='/createPost' element={<CreatePostForm />} />
+        </Route>
+
+        <Route element={<AuthAdmRoute />}>
+          <Route exact path='/adm' element={<Adm />} />
         </Route>
       </Route>
 
