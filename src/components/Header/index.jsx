@@ -19,7 +19,7 @@ export default function Header() {
         <FaRegComments size={24} />
       </Link>
 
-      <Link to='/location'>
+      <Link to='/about'>
         <FaLocationDot size={24} />
       </Link>
 

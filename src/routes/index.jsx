@@ -12,15 +12,18 @@ import Register from '../pages/Register';
 import Community from '../pages/Community';
 import Adm from '../pages/Adm';
 import EditUser from '../pages/EditUser';
+import About from '../pages/About';
 
 import CreatePostForm from '../components/CreatePostFrom';
 import CreateQuestionForm from '../components/CreateQuestionFrom';
 import PostShow from '../components/PostShow';
+import CreateAboutForm from '../components/CreateAboutForm';
 
 export default function MainRoutes() {
   return (
     <Routes>
       <Route exact path='/' element={<Home />} />
+      <Route exact path='/about' element={<About />} />
 
       <Route exact path='/auth' element={<Login />} />
 
@@ -31,6 +34,9 @@ export default function MainRoutes() {
       <Route exact path='/question/:id' element={<Community />} />
 
       <Route exact path='/register' element={<Register />} />
+
+      {/*privar rota para organization*/}
+      <Route exact path='/createAbout' element={<CreateAboutForm />} />
 
       <Route element={<AuthRoute />}>
         <Route exact path='/user' element={<User />} />

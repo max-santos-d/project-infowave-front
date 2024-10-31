@@ -27,12 +27,15 @@ export default function User() {
 
   const handleQuestions = async () => {
     try {
-      setLoading(true);
-      const { response } = await (await api.get('/questionSearchByUser')).data;
-      setClickedLikes(false);
-      setPosts([]);
-      setQuestions(response);
-      setLoading(false);
+      if (user._id) {
+        setLoading(true);
+        const { response } = await (await api.get('/questionSearchByUser')).data;
+        setClickedLikes(false);
+        setPosts([]);
+        setQuestions(response);
+        setLoading(false);
+      }
+      return;
     } catch (err) {
       console.log(err);
       toast.error('Erro ao realizar requisição');

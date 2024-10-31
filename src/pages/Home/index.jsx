@@ -30,7 +30,7 @@ export default function Home() {
       setLoading(false);
     } catch (err) {
       console.log(err);
-      toast.error('Erro de requisição.');
+      toast.error('erro de requisição.');
       setLoading(false);
     }
   };
