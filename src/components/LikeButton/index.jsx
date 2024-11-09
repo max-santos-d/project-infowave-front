@@ -34,7 +34,8 @@ export default function LikeButton({ id, likes, type }) {
       }
     } catch (err) {
       console.log(err);
-      toast.success('Erro ao realizar ação');
+      if (err.status === 401) return toast.error('você precisa estar logado para realizar essa requisição');
+      return toast.error('Erro ao realizar ação');
     }
   };
 
